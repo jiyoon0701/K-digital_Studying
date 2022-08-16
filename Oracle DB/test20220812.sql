@@ -11,7 +11,7 @@ select * from student;
 select studno, name, deptno1 from student where name like '%훈';
 --5.  학생 중 전화번호(tel)가 서울지역인 학생의 이름, 학번, 전화번호 출력하기 
 select name, studno, tel from student where substr(tel,1,2) = '02';
-
+select name, studno, tel from student where tel like '02%';
 --6. 학생 중  id에 'M'문자를 가지고 있는 학생의 이름,  id,  학과번호1을 출력하기
 -- 대소문자 구분 x
 select name, id, deptno1 from student where upper(id) like '%M%';
@@ -36,7 +36,7 @@ select ename, sal from emp where substr(ename,1,1) = 'M';
 
 --12. EMP 테이블에서 이름의 두 번째 글자가 ‘L’인 사원의 이름, 업무를 조회하라.
 select ename, job from emp where substr(ename,2,1) = 'L';
-
+select ename, job from emp where ename like '_L';
 --13. EMP 테이블에서 보너스(comm)가 NULL인 사원의 사원번호, 이름, 업무, 급여, 입사일자, 부서번호를 출력하여라.
 select empno, ename, job, sal, hiredate, deptno from emp where comm is null;
 
@@ -120,7 +120,7 @@ select name, substr(jumin,1,2) || '년 ' || substr(jumin,3,2) || '월 ' || subst
 --30. EMP 테이블에서 scott의 사원번호, 성명, 담당업무(소문자로),  담당업무(대문자로), 첫 글자만 대문자로 변환하여 출력하여라.
 select empno, ename, lower(job) "담당업무(소문자)", upper(job) "담당업무(대문자)" , initcap(job) from emp where lower(ename) = 'scott';
 --31. EMP 테이블에서 이름의 첫 글자가 ‘K’보다 큰 사원의 사원번호,  이름, 업무를 출력하여라.
-select empno, ename, job from emp where substr(initcap(ename),1,1) >= 'K';
+select empno, ename, job from emp where upper(substr(initcap(ename),1,1)) >= 'K';
 
 --32 EMP 테이블에서 이름이 6자리 이상인 사원의 이름과 업무를  출력하여라.
 select ename, job from emp where length(ename) >= 6;

@@ -13,10 +13,10 @@ public class Test2 {
 	public static void main(String[] args) {
 		   byte a = 10;
 		   byte b = 20;
-		   byte c = (byte)(a + b); 
+		   byte c = (byte)(a + b); // 연산의 결과는 int
 		   char ch = 'A';
 		   ch = (char)(ch + 2);
-		   float f = 3.0f / 2.0f;
+		   float f = 3f / 2; // float = flaot / int;
 		   long l= 3000 * 3000 * 3000L;
 		   float f2 = 0.1f;
 		   double d = 0.1f;

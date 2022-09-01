@@ -29,7 +29,7 @@ public class CarEx1 {
 		c2.color = "red";
 		c2.number = 2345;
 		c2.sno = ++Car.cnt;
-//		c2.sno = ++c2.cnt;
+	//	c2.sno = ++c2.cnt;
 		System.out.println("c1자동차" + c1.toString());
 		System.out.println("c2자동차" + c2);		
 	}

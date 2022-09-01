@@ -27,7 +27,7 @@ class Card {
 public class CardEx1 {
 	public static void main(String[] args) {
 		System.out.println("카드의 크기:" + Card.width + "," + Card.height );
-//		System.out.println("카드의 종류:" + Card.kind + "," + Card.number );
+//     	System.out.println("카드의 종류:" + Card.kind + "," + Card.number );
 		Card c1 = new Card();
 		System.out.println("카드의 종류:" + c1.kind + "," + c1.number );
 		c1.kind = "Spade";

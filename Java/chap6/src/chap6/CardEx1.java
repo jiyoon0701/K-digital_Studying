@@ -19,7 +19,7 @@ package chap6;
  *                반드시 초기화 해야 사용할 수 있음                
  */
 class Card {
-	String kind; //인스턴스변수  c1.kind
+	String kind;//인스턴스변수  c1.kind
 	int number;  //인스턴스변수  c1.number
 	static int width = 250; //클래스변수  Card.width
 	static int height =100; //클래스변수  Card.height
@@ -27,7 +27,7 @@ class Card {
 public class CardEx1 {
 	public static void main(String[] args) {
 		System.out.println("카드의 크기:" + Card.width + "," + Card.height );
-//     	System.out.println("카드의 종류:" + Card.kind + "," + Card.number );
+ //    	System.out.println("카드의 종류:" + Card.kind + "," + Card.number );
 		Card c1 = new Card();
 		System.out.println("카드의 종류:" + c1.kind + "," + c1.number );
 		c1.kind = "Spade";

@@ -14,6 +14,7 @@ class Super {
 class Child extends Super { //기본생성자 제공. 
 	int y;
 	public Child() {
+	//	super();
 		super(10);  //
 		System.out.println("생성자 호출");
 	}

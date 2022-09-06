@@ -268,7 +268,7 @@ public class Test {
 //		17. 다음 A 인터페이스를 상속 받아서 새로운 B 인터페이스를 생성하고
 //		자 한다. 다음 보기 중 올바른 문장을 선택하시오. 
 //		1. public interface A { 
-//		2. String DEFAULT_GREETING = “Hello World”; 
+//		2. String DEFAULT_GREETING = “Hello World”; r
 //		3. public void method1(); 
 //		4. } 
 //		(1). public interface B extends A { } 

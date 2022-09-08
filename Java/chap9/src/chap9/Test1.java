@@ -1,4 +1,4 @@
-package chap9;
+ package chap9;
 /* 
  * UnsupportFunctionException 클래스 구현하기
  * 1. 멤버변수 : private final int ERR_CODE;
@@ -7,30 +7,24 @@ package chap9;
  *     public String getMessage() : 오버라이딩 메서드.
  *          부모클래스의 message 값과 ERR_CODE 값 반환.
  * 3. 예외처리를 안해도 되도록 구현.
- * 4. 생성자는 구동클래스의 호출에 맞도록 구현   
- * 
-[결과]
-지원하지 않는 기능입니다.,오류코드:200
-200
-chap9.UnsupportFunctionException: 지원하지 않는 기능입니다.,오류코드:200
-	at chap9.Test1_A.main(Test1_A.java:31) 
-*/
-
-class UnsupportFunctionException extends Exception {
-	private final int ERR_CODE = 200;
-	
-	 UnsupportFunctionException(String message, int ERR_CODE) {
-		// TODO Auto-generated constructor stub
+ * 4. 생성자는 구동클래스의 호출에 맞도록 구현         
+ */
+class UnsupportFunctionException extends RuntimeException {
+	private final int ERR_CODE;
+	UnsupportFunctionException(String msg, int code) {
+		super(msg);
+		ERR_CODE = code;
 	}
 	public int getErrCode() {
 		return ERR_CODE;
 	}
+	@Override
 	public String getMessage() {
-		return "지원하지 않는 기능입니다.,오류코드:" + ERR_CODE;
+		return super.getMessage() + ",오류코드:" + ERR_CODE;
 	}
 }
 
-public class Test1 {
+public class Test1{
 	public static void main(String[] args) {
 		try {
 			throw new UnsupportFunctionException("지원하지 않는 기능입니다.", 200);

@@ -15,4 +15,11 @@ public class Test9 {
 			System.out.print(getRand(-1,3)+",");
 		}
 	}
+	static int getRand(int f,int t) {
+		int min = Math.min(f,t);
+//		int min = (f > t)?t:f;
+		int max = Math.max(f,t);
+		int cha = max - min;
+		return (int)(Math.random() * (cha+1)) + min;
+	}
 }

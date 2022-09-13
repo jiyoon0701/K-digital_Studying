@@ -25,4 +25,20 @@ public class Test8 {
 		  System.out.println(fillZero(src, 3));
 		  System.out.println(fillZero(null, 3));
 	}
+	 static String fillZero(String str,int len) {
+		 if(str == null) return null;
+		 if(len <= 0) return "";		 
+		 if(str.length() >= len) 
+			   return str.substring(0,len);
+		 
+//		 StringBuffer sb = new StringBuffer();
+//		 for(int i=0;i<str.length();i++) {
+//			 sb.append(0);
+//		 }
+//		 sb.replace(len-str.length(), len, str);
+//		 return sb.toString();
+
+		 int num = Integer.parseInt(str);
+		 return String.format("%010d",num);
+	 }
 }

@@ -8,5 +8,8 @@ package chap11;
 public class Test6 {
 	public static void main(String[] args) {
 		String str = "1,234";
+		int num = Integer.parseInt(str.replace(",","")); //1234 숫자
+		System.out.println(String.format("%,d", num*10));
+		System.out.printf("%,d\n", num*10);		
 	}
 }

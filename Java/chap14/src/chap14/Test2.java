@@ -1,5 +1,7 @@
 package chap14;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /*
 bin/chap14/InputStreamEx1.class 파일을 읽어 다음 결과와 같이 출력하기 
@@ -11,6 +13,15 @@ bin/chap14/InputStreamEx1.class 파일을 읽어 다음 결과와 같이 출력�
  6E 69 74 3E 01 00 03 28 29 56 01 00 04 43 6F 64
 .... */
 public class Test2 {
-	public static void main(String[] args)  {
+	public static void main(String[] args) throws IOException {
+		FileInputStream fis = 
+		new FileInputStream("bin/chap14/InputStreamEx1.class");
+		byte[] buf = new byte[16];//16바이트씩 읽기
+		int len;
+		while ((len = fis.read(buf)) != -1) {
+			for (int i = 0; i < len; i++)
+				System.out.printf(" %02X", buf[i]);
+			System.out.println();
+		}
 	}
 }

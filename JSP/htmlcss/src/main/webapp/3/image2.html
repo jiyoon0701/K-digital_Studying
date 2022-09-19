@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/3/image2.html
+    lizard.jpg 이미지를 화면에 출력하기
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- img/lizard.jpg : html 페이지의 위치부터 경로 시작
+     ./img/lizard.jpg : html 페이지의 위치부터 경로 시작
+     ./ : 현재 폴더.
+     ../: 상위 폴더.
+ -->
+<img src='img/lizard.jpg' title='게코도마뱀'>
+<br>
+<!-- 이미지의 가로세로 길이 설정 -->
+<img src='./img/lizard.jpg' title='게코도마뱀' width="200" height="200">
+<br>
+<!-- 이미지의 가로 길이 설정 : 세로의 길이는 원이미지의 비율로 자동 설정됨 -->
+<img src='./img/lizard.jpg' title='게코도마뱀' width="150" >
+</body>
+</html>

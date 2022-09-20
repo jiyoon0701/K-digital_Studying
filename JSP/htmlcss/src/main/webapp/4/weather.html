@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--  src/main/webapp/4/weather.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>일기예보</title>
+<style type="text/css">
+  table,tr,td,th {  /*table태그 또는 tr태그 또는 td 또는 th 태그 */
+    border : solid 1px blue; /* 실선 선의두께 선의색상*/
+    border-collapse: collapse; /* 셀과셀사이의 간격을 제거 */
+    padding: 3px;            /* 셀내부의 여백 */
+  }
+  td {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<h3>일기예보</h3>
+<table>
+<!--
+   rowspan 속성: 행(세로)의 셀을 합하여 하나의 셀로 생성
+   colspan 속성: 열(가로)의 셀을 합하여 하나의 셀로 생성. 
+ -->
+<tr><th rowspan="2">지역</th><th colspan="2">27일(목)</th>
+    <th colspan="2">28일(금)</th><th colspan="2">29일(토)</th>
+</tr>
+<tr><td>오전</td><td>오후</td><td>오전</td><td>오후</td>
+    <td>오전</td><td>오후</td></tr>
+<tr><td>서울<br>경기도</td>
+<td><img src="img/shine.png"></td><td><img src="img/shine.png"></td>
+<td><img src="img/shine.png"></td><td><img src="img/rain.png"></td>
+<td><img src="img/rain.png"></td><td><img src="img/rain.png"></td>
+</tr>    
+<tr><td>제주도</td>
+<td><img src="img/shine.png"></td><td><img src="img/shine.png"></td>
+<td><img src="img/shine.png"></td><td><img src="img/rain.png"></td>
+<td><img src="img/rain.png"></td><td><img src="img/rain.png"></td>
+</tr>    
+</table>
+<br>
+<table>
+<tr><th rowspan="2">지역</th><th colspan="2">27일(목)</th>
+    <th colspan="2">28일(금)</th><th colspan="2">29일(토)</th>
+</tr>
+<tr><td>오전</td><td>오후</td><td>오전</td><td>오후</td>
+    <td>오전</td><td>오후</td></tr>
+<tr><td>서울<br>경기도</td>
+<td colspan="2" align="center"><img src="img/shine.png"></td>
+<td><img src="img/shine.png"></td><td><img src="img/rain.png"></td>
+<td colspan="2"><img src="img/rain.png"></td>
+</tr>    
+<tr><td>제주도</td>
+<td colspan="2"><img src="img/shine.png"></td>
+<td><img src="img/shine.png"></td><td><img src="img/rain.png"></td>
+<td colspan="2"><img src="img/rain.png"></td>
+</tr>    
+</table>
+
+
+</body>
+</html>

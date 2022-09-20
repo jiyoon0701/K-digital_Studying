@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/4/form.html
+   form 관련 태그 : 입력태그들을 가짐.
+                  입력된값들을 전송하는 단위.
+                  form 내부에 입력값(파라미터값)들을 한꺼번에 서버로 전송.  
+   input 태그
+     type="text" : 텍스트 한줄 입력. 기본값
+     type="password" : 텍스트 한줄 입력. 입력된 내용이 보이지 않음.
+     type="radio" : name속성의 같이 같은 경우 한개만 선택. 
+     type="checkbox" : 선택 또는 선택안함 
+     type="file" : 파일 선택 기능
+     type="date" : 날짜 선택 기능
+     
+   select 태그 : 목록 중 선택 
+   textarea 태그 : 텍스트 여러 줄 입력     
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form>
+  아 이 디:<input type="text"><br>
+  비밀번호:<input type="password"><br>
+  <hr>
+  정보공개:<input type="radio" name="a" checked>공개
+         <input type="radio" name="a">비공개<br>
+  취미 : <input type="checkbox" >탁구
+        <input type="checkbox">배드민턴       
+        <input type="checkbox">축구<br>
+  일자 : <input type="date">      
+  <hr>
+  <input type="file">
+  <hr>
+  이메일:<input type="text" size="5">@
+  <select>
+    <option>선택</option><option>naver.com</option>
+    <option>hanmail.net</option><option>gmail.com</option>
+    <option>직접입력</option>
+  </select> 
+  <hr>
+   인사말:
+  <textarea rows="5" cols="60"></textarea>       
+</form>
+</body>
+</html>

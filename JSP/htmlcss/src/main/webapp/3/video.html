@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/3/video.html => 현재폴더 3
+     src/main/webapp/sample-video.mp4 => 3폴더를 기준으로 상대 경로
+                       src="../sample-video.mp4" 
+     src/main/webapp/sample-video.mp4 => 절대 경로 
+                       src="/htmlcss/sample-video.mp4"
+                       
+     video/mp4 : MIME 형식. 파일의 종류 표시.                  
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<video width="560" height="480" autoplay controls loop>
+  <source src="/htmlcss/sample-video.mp4" type="video/mp4">
+</video>
+</body>
+</html>

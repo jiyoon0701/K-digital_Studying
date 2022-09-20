@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--  src/main/webapp/5/css.html
+   css 적용방법
+   1. inline 방식 : 태그 내부에 style 속성으로 스타일 설정
+      <div style="..." >
+   2. 내부 style  : html 내부에 <style>태그내부에 스타일 설정
+   3. 외부 style  : html 문서 외부에서 css 파일을 연결하여 스타일 설정
+ -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 내부 css : html 페이지 내부에 css 설정 -->
+<style type="text/css">
+   h3 { color : red;  }
+   p {  color : blue; }
+</style>
+</head>
+<body>
+<h3>여행(travel)의 어원</h3>
+<p>여행을 뜻하는 영어 단어 'travel'의 어원은 'travail(고통, 고난)'이라고 합니다.
+교통이 발달하지 않은 과거에는 여행이 고통이나 고난이었던 거지요. 
+여행이 오락이나 쾌락으로 여겨지게 된 것은 교통수단이 조금 더 발달된 19세기에 
+이르러서입니다.</p>
+
+<hr>
+<!-- inline 방식의 style : 태그 내부에 style 속성으로 css 설정 -->
+<h3 style="color:blue;">제주여행정보</h3>
+<ul>
+  <li>제주축제및행사</li>
+  <li>추천 여행 코스</li>
+  <li>제주 맛집</li>
+</ul>
+</body>
+</html>

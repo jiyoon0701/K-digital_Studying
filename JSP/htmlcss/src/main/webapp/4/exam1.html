@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--  src/main/webapp/4/exam1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+  table,tr,td,th {  /*table태그 또는 tr태그 또는 td 또는 th 태그 */
+    border : solid 1px black; /* 실선 선의두께 선의색상*/
+    border-collapse: collapse; /* 셀과셀사이의 간격을 제거 */
+    padding: 8px;            /* 셀내부의 여백 */
+  }
+  td {
+     text-align: center;
+  }
+</style>
+
+</head>
+<body>
+<h3>서해 앞바다 해상예보</h3>
+<table>
+<tr><th colspan="2">날짜</th><th>날씨</th><th>풍향</th><th>풍속(m/s)</th></tr>
+<tr><td>24일(월)</td><td>오후</td>
+    <td><img src="img/rain.png"></td><td>남-남서</td><td>3~7</td></tr>
+<tr><td rowspan="2">25일(화)</td><td>오전</td>
+    <td><img src="img/rain.png"></td><td>서-북서</td><td>3~6</td></tr>
+<tr><td>오후</td>
+    <td><img src="img/shine.png"></td><td>북서-서</td><td>3~6</td></tr>
+</table>
+</body>
+</html>

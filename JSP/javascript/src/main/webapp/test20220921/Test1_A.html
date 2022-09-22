@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--  1 부터 100까지의 합,짝수합, 홀수합을 계산하여  result1,result2, result3 에 출력하기-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+100까지의 합 : <input type="text" id="result1" ><br>
+100까지의 짝수합 : <input type="text" id="result2" ><br>
+100까지의 홀수합 : <input type="text" id="result3" ><br>
+
+<script type="text/javascript">
+  let tot1 = 0;
+  let tot2 = 0;
+  let tot3 = 0;
+  for (let i=0;i<=100;i++) {
+	  tot1 += i
+	  if(i%2==0) tot2 += i
+	  else tot3 += i
+  }
+  result1.value = tot1
+  result2.value = tot2
+  result3.value = tot3
+</script>
+
+</body>
+</html>

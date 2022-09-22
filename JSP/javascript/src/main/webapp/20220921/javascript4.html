@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220921/javascript4.html-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>반복문 예제</title>
+</head>
+<body>
+
+<input type="text" id="result" >
+
+<script type="text/javascript">
+   let tot = 0  //변수 선언
+   for(i=1;i<=100;i++) {
+	   tot += i
+   }
+   //id속성은 유일한 의미를 가짐 
+   result.value = tot
+   
+   function numtotal(t) {
+	  let tot = 0
+//	  let n = num.value //10
+      let n = document.querySelector("#num").value
+	  if (t==0) {
+     	  for(let i=1;i<=n;i++) {
+	    	  tot += i
+	      }
+	  } else if (t==1) {
+     	  for(let i=1;i<=n;i+=2) {
+	    	  tot += i
+	      }
+	  } else {
+     	  for(let i=2;i<=n;i+=2) {
+	    	  tot += i
+	      }
+	  }
+//	  result.value = tot
+      window.document.querySelector("#result").value = tot
+   }
+</script>
+<hr>
+<h3>id=num 태그에서 입력받은 값까지의 합을 출력하기</h3>
+<input type="text" id="num" >
+<input type="button" value="합계구하기" onclick="numtotal(0)">
+<input type="button" value="짝수합계구하기" onclick="numtotal(2)">
+<input type="button" value="홀수합계구하기" onclick="numtotal(1)"><br>
+<input type="button" value="종료" onclick="window.close()" >
+</body>
+</html>
+<!--
+   JavaScript 에서 제공하는 내장객체 
+   1. window : 자바스크립트의 최상단 객체. 
+   2. document :문서담당.
+   3. console : 개발자화면의 콘솔에 출력하는 객체
+   4. location : 현재 페이지의 url 정보
+            location.href="페이지명" => 현재 페이지가 페이지명으로 이동
+   5. history : 현재 웹페이지의 url의 이동내역을 저장.
+            history.go(-1) : 앞페이지로 페이지 이동          
+   6. navigator : 브라우저 정보 저장 객체          
+   
+ -->

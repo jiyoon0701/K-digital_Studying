@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220923/javascript5.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>타자 연습 게임</title>
+<style type="text/css">
+  div {
+     position : absolute; /* 절대 좌표. */
+  }
+  #main {
+     width : 450px;  height:500px;
+     border : 1px solid blue;
+     overflow : hidden;
+  }
+  input {
+     position:absolute;
+     top : 510px; left:10px;
+     width: 400px;
+  }
+</style>
+<script type="text/javascript">
+   //배열
+   let datas = [ //임의로 선택하여 화면에 출력될 데이터
+	  ["태연","유리","윤아","효연","수영","서현","티파니","써니","제시카"],
+	  ["정국","뷔","지민","슈가","진","알앰","제이홉"],
+	  ["미나","나연","다현","지효","모모","채영","쯔위","사나","정연"]
+     ]
+   let worlds = [] //화면에 표시될 단어 목록
+   let colors = ["red","blue","green","grey","orange","black"]
+   
+   window.onload=function() {
+	   //setInterval(함수,밀리초) : 2초에 한번씩 createMode 함수 실행 
+	 cm = setInterval(createMode, 2000);
+	   //0.5초마다 화면에서 단어를 아래로 이동
+	 mm = setInterval(moveMode, 500);
+   }
+   //자바스크립트로 클래스 생성
+   function MovingChar() {  //생성자
+	   //멤버 변수 : h3,x,y,vX,vY
+	   this.h3 = document.createElement('h3') //h3태그 생성
+	   this.h3.innerHTML = randomData()  //h3태그에 이름 저장 
+	   this.x = random(400) // x좌표 위치
+	   this.y=0             // y좌표 위치
+	   this.vX = 0          // x좌표 증가분 
+	   this.vY = 10         // y좌표 증가분
+	   this.h3.style.position = 'absolute'
+	   this.h3.style.color = colors[random(5)] //h3태그의 색상 설정
+	   //div 태그에 h3 태그 추가
+	   document.querySelector("#main").appendChild(this.h3)
+   }
+   //MovingChar 클래스의 멤버 함수 정의
+   MovingChar.prototype.move = function(){
+	   if((this.x+this.h3.innerHTML.length)>400) {
+		   this.x = 400 - (this.innerHTML.length+1)
+	   }
+	   this.y += this.vY
+	   this.h3.style.left = this.x + 'px'//h3 태그의 왼쪽 위치값을 설정
+	   this.h3.style.top = this.y + 'px' //h3 태그의 위쪽 위치값을 설정
+   }
+   //MovingChar 클래스의 멤버 함수 정의
+   MovingChar.prototype.remove = function(){
+	   //div 태그에서 h3태그 제거.
+		document.querySelector("#main").removeChild(this.h3)   
+   }
+   function createMode() {
+	   worlds.push(new MovingChar())
+   }
+   
+</script>
+</head>
+<body>
+<div id="main"></div>
+<div style="width:400px">
+<input type="text" onchange="deleteMode(this.value)" id="input">
+</div>
+</body>
+</html>

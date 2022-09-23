@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--  src/main/webapp/20220923/javascript4.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Date 객체</title>
+</head>
+<body>
+<script type="text/javascript">
+   now = new Date()  //현재일시
+   document.write(now,"<br>")
+   document.write(now.toString(),"<br>")
+   document.write(now.toGMTString(),"<br>") //표준시. 영국시간
+   document.write(now.toLocaleString(),"<br>") //지역일시. 
+   document.write("년도:"+now.getYear(),"<br>")
+   document.write("년도:"+now.getFullYear(),"<br>") //4자리 시간
+   document.write("월(0~11):"+now.getMonth(),"<br>")
+   document.write("일:"+now.getDate(),"<br>")
+   document.write("요일(0:일~6:토):"+now.getDay(),"<br>")
+   document.write("시:"+now.getHours(),"<br>")
+   document.write("분:"+now.getMinutes(),"<br>")
+   document.write("초:"+now.getSeconds(),"<br>")
+   document.write
+   ("getTime()1970년부터 현재까지 :" + now.getTime() + "msec<br><hr>")
+   //now의 다음날로 설정하기
+   now.setTime(now.getTime() + (1000*60*60*24))
+   document.write("다음날:" + now,"<br>")
+   
+   //Date 객체로 일자 설정하기 : 2022년12월25일 설정하기
+   date = new Date(2022,(12-1),25)
+   document.write("date:"+date,"<br><hr>")
+   document.write(date.toGMTString(),"<br>") //표준시. 영국시간
+   
+   function show_date() {
+	   dateprt.innerHTML =
+		  "선택된 날짜:" + document.querySelector("#date").value
+   }
+</script>
+  <input type="date" id="date"> 
+  <input type="button" value="날짜입력" onclick="show_date()">
+  <div id="dateprt"></div>
+</body>
+</html>

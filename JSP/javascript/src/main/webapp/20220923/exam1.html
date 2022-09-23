@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220923/exam1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+ table { width:100%; border-collapse: collapse;}
+ th,td {border : 3px solid #bcbcbc; 
+        text-align: center; padding: 8px;}
+ th {background-color: #e2e2e2; color:#111111;}
+ td {background-color: #f2f2f2;}
+ caption {color:#111111; font-size: 20px; 
+          background-color: #ffffff;}
+ .text-red { color : red;}
+ .text-blue { color : blue;} 
+</style>
+<script type="text/javascript">
+  function show_cal() {
+	  let year = document.f.year.value
+	  let mon = document.f.month.value
+	  let cal1 = new Date(year,mon-1,1) //선택한 월의 첫째날
+	  let cal2 = new Date(year,mon,1)   //선택한 월의 마지막날
+	  cal2.setTime(cal2.getTime() - (1000*60*60*24))
+	  console.log(cal2)
+	  let html = "<table><caption>"+year+"년"+mon+"월</caption>"
+	  //1. header 출력 
+	  html += "<tr><th class='text-red'>일</th><th>월</th><th>화</th><th>수</th>"
+	  +"<th>목</th><th>금</th><th class='text-blue'>토</th></tr>"
+	  //2. 일자 부분 출력
+	  week = cal1.getDay()  //0:일~6:토
+	  day = 0
+	  for(let i=0;i<6;i++) {
+		  html += "<tr>" 
+		  for(let j=0;j<7;j++) {
+			  if (j==0) html += "<td class='text-red'>"
+			  else if (j==6) html += "<td class='text-blue'>"
+			  else html += "<td>"
+
+			  if(i==0) { //첫번째 주
+				 if(week <= j)//5,5
+					 html += ++day
+				 else	 
+					 html += "&nbsp;"
+			  } else {  //2번째 주 이후
+				  //cal2.getDate() : 마지막 일자
+				  if (cal2.getDate() > day) 
+					   html += ++day
+				   else
+					   html += "&nbsp"
+			  }
+			  html += "</td>"
+		  }
+		  html += "</tr>"
+		  if(day >= cal2.getDate()) break;  //날짜 출력이 완료된 경우
+	  }
+	  html +="</table>"
+	  calandar.innerHTML = html
+  }
+</script>
+</head>
+<body>
+	<form name="f">
+		<select name="year">
+			<option value="2020">2020년</option>
+			<option value="2021">2021년</option>
+			<option value="2022">2022년</option>
+			<option value="2023">2023년</option>
+			<option value="2024">2024년</option>
+		</select>
+		<select name="month">
+			<option value="1">1월</option>
+			<option value="2">2월</option>
+			<option value="3">3월</option>
+			<option value="4">4월</option>
+			<option value="5">5월</option>
+			<option value="6">6월</option>
+			<option value="7">7월</option>
+			<option value="8">8월</option>
+			<option value="9">9월</option>
+			<option value="10">10월</option>
+			<option value="11">11월</option>
+			<option value="12">12월</option>
+		</select>
+		<input type="button" value="달력보기" onclick="show_cal()">
+		<div id="calandar"></div>
+	</form>
+</body>
+</html>

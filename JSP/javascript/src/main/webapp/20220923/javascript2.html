@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220923/javascript2.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+   function checkinput(f) {  //입력값 검증
+	   //f : form 객체 document.f
+	   if(f.id.value == '') { //입력안된경우
+		   alert("아이디를 입력하세요")
+		   f.id.focus() //id 란에 제어가 이동.
+		   return false; //submit 취소.
+	   }
+	   if(f.pw.value == '') {
+		   alert("비밀번호를 입력하세요")
+		   f.pw.focus()
+		   return false;
+	   }
+	   //아이디값이 3자이상되어야만 submit 성공.
+	   if(f.id.value.length < 3) {
+		   alert("아이디는 3자 이상 입력하세요")
+		   f.id.focus() 
+		   return false; //submit 취소.
+	   }
+	   //opener : 현재창을 open한 윈도우의 window 객체임.
+	   //         javascript3.html 페이지의 window 객체.
+	   
+	   //  opener의 name 속성을 이용하여 값 전달
+	   //opener.document.f.id.value=f.id.value;
+	   //opener.document.f.pw.value=f.pw.value;
+	   
+	   // opener id="id", id="pw" 태그로 값을 전달.
+	   //1 : ECMA6 이후 버전
+	   //opener.document.querySelector("#id").value=f.id.value;
+	   //opener.document.querySelector("#pw").value=f.pw.value;
+	   //2 : 기존의 사용하던 DOM 관련 함수. 
+	   opener.document.getElementById("id").value=f.id.value;
+	   opener.document.getElementById("pw").value=f.pw.value;
+	   //self : 현재 윈도우의  window 객체.
+	   self.close() //내창 닫기 
+	   return false;
+   }
+</script>
+</head>
+<body>
+<!--
+  form 태그 : 입력값들을 관리하는 태그. 입력값들을 한꺼번에 서버로 전송하는 단위.
+  submit : 버튼이 클릭되면 form의 값들을 서버로 전송 기능
+           submit 버튼이 속한 form 객체에 onsubmit 이벤트 발생됨 
+  checkinput(this) : 결과가 false 인경우 onsubmit 이벤트를 취소시킴   
+  this : form 객체. 이벤트 발생된 객체.     
+ -->
+<form name="f" method="post" onsubmit="return checkinput(this)">
+  아이디 : <input type="text" name="id"><br>
+  비밀번호 : <input type="password" name="pw"><br>
+  <input type="submit" value="로그인">
+</form>
+</body>
+</html>

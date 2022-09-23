@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220923/javascript3.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>open() 함수</title>
+<script type="text/javascript">
+   let nw
+   function open_win() {
+	   //open(새창에 열린 페이지명,새창의이름,새창에적용옵션)
+	   //nw : 새창의 window 객체임.
+	   //nw.document : 새창의 문서객체
+	   nw = window.open
+	   ('','',"width=600,height=200,menubar=no,top=200,left=200")
+	   nw.document.write("새로운 윈도우 입니다.<br>")
+	   nw.document.write
+	     ("javascript3.html 페이지의 open()로 열린창입니다..<br>")
+   }
+   function close_win() {
+	   nw.close() //새로운 창을 닫기 
+   }
+   function open_win2() {
+	   nw = open("javascript2.html",'',
+			   "width=600,height=200,menubar=no,top=200,left=200")
+	   //새창의 id값에 aaa 입력하기
+	   nw.onload = function(){ //nw 윈도우의 로드가 완료되면
+		   nw.document.f.id.value = 'aaa'
+	   }
+   }
+</script>
+</head>
+<body>
+<a href="javascript:open_win()">새창열기</a>
+<a href="javascript:open_win2()">javascript2.html 페이지 새창열기</a>
+<a href="javascript:close_win()">새창닫기</a>
+<hr>
+<form name="f">
+  아이디 : <input type="text" name="id"       id="id"><br>
+  비밀번호 : <input type="password" name="pw" id="pw"><br>
+</form>
+</body>
+</html>

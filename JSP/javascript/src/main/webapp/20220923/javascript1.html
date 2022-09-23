@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220923/javascript1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문자열 함수</title>
+</head>
+<body>
+<script type="text/javascript">
+a = new String("Client-Side JavaScript Guide")
+b = 6.3;
+//문자열의 길이
+document.write("a.length :" + a.length + "<br>")
+//시작, 끝의 문자열 판단
+document.write("a.startsWith('C'):" + a.startsWith('C') + "<br>")
+document.write("a.endsWith('Guide'):" + a.endsWith('Guide')+"<br>")
+// split : 문자열 분리하여 배열로 리턴
+// join  : 배열의 요소를 연결하여 하나의 문자열로 리턴
+document.write("a.split(' '):" + a.split(' ').join('#')+"<br>")
+let strarr = a.split(' ')
+for(let a in strarr) {
+	document.write("---" + strarr[a] + "<br>")
+}
+//join('#') : 배열의 요소를 지정된 문자로 연결.
+document.write("strarr.join('#'):"+strarr.join('#')+"<br>")
+
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220922/javascript7.html 
+-->
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이미지 선택하기</title>
+<script type="text/javascript">
+  function drawimg(sel, img) {
+	  //sel : select 태그
+	  //img : img 태그 
+	  img.src = "../img/"+sel.value  //../img/apple.gif
+  }
+</script>
+</head>
+<body>
+<form name="f">
+<table>
+<!-- this : 현재객체. 이벤트 발생 객체. select 태그
+   document.img2 : name="img2"인 객체. <img 객체
+-->
+<tr><td><select name="s" onchange="drawimg(this,document.img2)">
+  <option value="strawberry.gif">딸기</option>
+  <option value="banana.jpg">바나나</option>
+  <option value="apple.gif">사과</option>
+</select></td>
+ <td><img name="img2" 
+      src="../img/strawberry.gif" width="100"></td>
+</tr></table>
+</form>
+</body>
+</html>

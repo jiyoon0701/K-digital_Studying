@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<!--src/main/webapp/20220922/javascript9.html 
+ -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TTS(Text to Speech) 연습</title>
+<script type="text/javascript">
+  let msg = new SpeechSynthesisUtterance(); //TTS 객체
+  function ttsTest() {
+	  msg.text = intext.value; //textarea에 내용
+	  speechSynthesis.speak(msg); //msg 내용을 읽기
+  }
+</script>
+</head>
+<body>
+<textarea rows="10" cols="50" id="intext">안녕하세요.반갑습니다.</textarea>
+<input type="button" onclick="ttsTest()" value="읽기">
+</body>
+</html>

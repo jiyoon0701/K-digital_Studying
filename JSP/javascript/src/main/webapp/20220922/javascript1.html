@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220922/javascript1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>name 속성을 이용한 태그 선택</title>
+<script type="text/javascript">
+   function copyvalue() {
+	   document.f1.num2.value = document.f1.num1.value
+   }
+   function sumall() {
+	   let num = document.f2.num.value
+	   let tot1=0,tot2=0,tot3=0
+	   for (let i=1;i<=num;i++) {
+		   tot1 += i
+		   if(i%2==0) tot2 += i
+		   else tot3 += i
+	   }
+	   document.f2.sum.value = tot1
+	   document.f2.evensum.value = tot2
+	   document.f2.oddsum.value = tot3
+   }
+</script>
+</head>
+<body>
+<form name="f1">
+<input type="text" name="num1">
+<input type="text" name="num2">
+<input type="button" value="복사" onclick="copyvalue()">
+</form>
+<hr>
+<h2>입력된 숫자까지의 합계 구하기</h2>
+<form name="f2">
+ <input type="text" name="num">
+ <input type="button" value="합계" onclick="sumall()"><br>
+  전체 합계 : <input type="text" name="sum"><br>
+  짝수 합계 : <input type="text" name="evensum"><br>
+  홀수 합계 : <input type="text" name="oddsum"><br>
+</form>
+</body>
+</html>

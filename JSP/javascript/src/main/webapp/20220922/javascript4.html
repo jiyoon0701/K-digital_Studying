@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220922/javascript4.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window 객체의 함수</title>
+</head>
+<body>
+<script type="text/javascript">
+  let i=2
+  //eval 함수 : 수식 계산 함수
+  document.write("eval(3+4*(5-i))="+eval(3+4*(5-i))+"<br>")
+  document.write("eval(3+4*5)="+eval('3+4*5')+"<br>")
+  document.write(`3+4*(5-i)=${3+4*(5-i)}<br>`) //ECMA6
+  document.write("3+4*(5-i)="+`${3+4*(5-i)}` + "<br>") //ECMA6
+  //isNaN : 숫자가 아니니?   숫자가 아닌경우 : true, 숫자인 경우 : false 
+  document.write("isNaN('한국')="+window.isNaN('한국')+"<br>")
+  document.write("isNaN('123')="+isNaN('123')+"<br>")
+  //정수형 <= 문자열
+  document.write("parseInt('10')="+parseInt('10')+"<br>")
+  document.write("parseInt('12',8)="+parseInt('12',8)+"<br>")
+  document.write("parseInt('FF',16)="+parseInt('FF',16)+"<br>")
+  document.write("parseInt('FF')="+parseInt('FF')+"<br>")
+</script>
+</body>
+</html>

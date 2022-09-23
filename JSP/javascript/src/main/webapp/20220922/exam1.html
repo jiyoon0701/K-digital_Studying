@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220922/exam1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>prompt 메세지 창에 수식을 입력받아 결과를 화면에 출력</h2>
+<script type="text/javascript">
+  let result = prompt("수식을 입력하세요")
+  document.write(result + "=" + eval(result)+"<br>")
+  document.write(`${result}` + "=" + eval(result)+"<br>")
+</script>
+
+</body>
+</html>

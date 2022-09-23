@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--  src/main/webapp/230220922/javascript10.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문자열 관련 함수</title>
+</head>
+<body>
+<script type="text/javascript">
+   a = new String("Client-Side JavaScript Guide")
+   b = 6.3;
+   document.write("문자열 a:" + a +",문자열 b:"+b + "<br>")
+   document.write("a[5]:" + a[5]+ "<br>")
+   document.write("a.charAt(5):" + a.charAt(5)+ "<br>")
+   document.write("a.indexOf('S'):" + a.indexOf('S')+ "<br>")
+   document.write("a.lastIndexOf('S'):" + a.lastIndexOf('S')+ "<br>")
+   //부분문자열
+   //slice : 17번 인덱스부터 이후 문자열 
+   document.write("a.slice(17):" + a.slice(17)+ "<br>")
+   document.write("a.substr(17):" + a.substr(17)+ "<br>")
+   document.write("a.substring(17):" + a.substring(17)+ "<br>")
+   //substr(시작인덱스,길이)
+   document.write("a.substr(1,7):" + a.substr(1,7)+ "<br>")
+   //substring(시작인덱스,끝인덱스) : 1번인덱스 부터 6번인덱스까지 
+   document.write("a.substring(1,7):" + a.substring(1,7)+ "<br>")
+   
+</script>
+</body>
+</html>

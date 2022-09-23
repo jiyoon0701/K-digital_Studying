@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--src/main/webapp/20220922/javascript7.html 
+ -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마우스를 이용한 이미지 변경</title>
+<script type="text/javascript">
+   function mover(n) { //mouseover 이벤트 발생시 호출되는 함수
+	   //document.images : 문서내부의 모든 img 태그들. 이미지 태그의 배열 객체
+	   document.images[n].src = "../img/"+n+"_over.jpg"
+   }
+   function mout(n) { //mouseout 이벤트 발생시 호출되는 함수
+	   document.images[n].src = "../img/"+n+"_out.jpg"
+   }
+</script></head><body>
+<table> <tr><td height="60" align="center">
+  <!-- # : 다른 페이지로 이동 안됨 
+       onmouseover : 마우스 커서가 영역 내부에 있는 경우
+       onmouseout  : 마우스 커서가 영역 외부에 있는 경우 
+  -->
+  <a href="#" onmouseover="mover(0)" 
+              onmouseout="mout(0)">
+    <img name="m0" src="../img/0_out.jpg" > <!-- document.images[0] -->
+  </a></td></tr>
+  <tr><td height="60" align="center">
+  <a href="#" onmouseover="mover(1)" onmouseout="mout(1)">
+    <img name="m1" src="../img/1_out.jpg" > <!-- document.images[1] -->
+  </a></td></tr>
+  <tr><td height="60" align="center">
+  <a href="#" onmouseover="mover(2)" onmouseout="mout(2)">
+    <img name="m2" src="../img/2_out.jpg" > <!-- document.images[2] -->
+    </a>
+    </td></tr>
+  <tr><td height="60" align="center">
+  <a href="#" onmouseover="mover(3)" onmouseout="mout(3)">
+    <img name="m3" src="../img/3_out.jpg" > <!-- document.images[3] -->
+    </a></td></tr>
+</table>
+
+</body>
+</html>

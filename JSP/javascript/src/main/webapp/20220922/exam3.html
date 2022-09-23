@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>구구단 출력하기</title>
+<style type="text/css">
+   input {text-align: right;}
+   table {	width : 100%; 	border-collapse: collapse;  }
+   th,td {
+	 border : 3px solid #bcbcbc;
+	 text-align: center;
+	 padding: 8px;
+    }
+   th { background-color: #B7F0B1;     color : #353535;     }
+   td { background-color: #F2F2F2;}
+   caption {	color : #111111;  font-size: 20px;
+	       background-color: #FFFFFF;  }
+   input[type=text],input[type=password],textarea {
+	   width:100%;
+   }   
+</style>
+<script type="text/javascript">
+// window.onload : window load 되는 경우 발생 되는 이벤트
+   window.onload=function(){
+	   let html = "<table>"
+	   for (let i=2;i<=9;i++) {
+		   html += "<tr><th>"+ i+"단</th></tr>"
+		   for(let j=2;j<=9;j++) {
+			   html += "<tr><td>"+i+"*"+j+"="+(i*j)+"</td></tr>"
+		   }
+	   }
+	   html += "</table>"
+	   console.log(html)
+	   gugudan.innerHTML = html;
+   }
+</script>
+</head>
+<body>
+<h3>2단~ 9단까지의 구구단 출력하기</h3>
+<div id="gugudan"></div>
+</body>
+</html>

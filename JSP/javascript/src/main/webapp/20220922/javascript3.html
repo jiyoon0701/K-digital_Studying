@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220922/javascript3.html
+    window 객체 : html 페이지의 최상단 객체. window 생략 가능
+    alert(내용) : 확인 메세지. 리턴값이 없음. 
+    confirm(내용) : 확인,취소 선택. 
+                   확인 선택 : true
+                   취소 선택 : false
+    prompt(내용) : 입력란이 존재. 값을 입력받고, 입력받은 값을 리턴
+    this.form : 내가 속한 form 객체를 의미                
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>window 객체의 3가지 메세지 창</title>
+</head>
+<body>
+<form name="f">
+<input type="radio" name="dbox" 
+   onclick="document.f.echo.value=window.alert('alert 메세지 창 호출')"> 
+   alert 메세지 창 호출<br>
+<input type="radio" name="dbox" 
+   onclick="this.form.echo.value=window.confirm('confirm 메세지 창 호출')"> 
+   confirm 메세지 창 호출<br>
+<input type="radio" name="dbox" 
+   onclick="this.form.echo.value=window.prompt('prompt 메세지 창 호출')"> 
+   prompt 메세지 창 호출<br>
+<input type="text" name="echo">
+
+</form>   
+</body>
+</html>

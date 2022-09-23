@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>문제 맞추기</title>
+</head>
+<body>
+<script type="text/javascript">
+   function getInt() {
+	   return Math.floor(Math.random() * 100);
+   }
+   let op = new Array("+","-","*","/","%");
+   
+   function getOp() { 
+	   return op[Math.floor(Math.random() * op.length)];
+   }
+   let tcnt = 0; //입력한 갯수
+   let cnt = 0;  //정답 수
+   while(true) {
+      let str = getInt() + getOp() + getInt();
+      let ans = prompt(str + "= 식의 정답을 입력하세요(종료:9999)",0); 
+      if(ans == 9999) break;
+      tcnt++; //문항수
+      let res = eval(str);
+      if(res != ans) {
+	    document.write("<font color='red' size='5'>" +"오답=></font>");
+	    document.write(str + "=" + res + ", 입력 값:" + ans + "<br>")
+      } else { //정답
+	    document.write("<font color='blue' size='5'>" +"정답</font><br>");
+		cnt++;
+      }
+   }
+   document.write(tcnt+"문제 중 총"+cnt + "개를 맞추셨습니다.")
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220922/javascript2.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마우스 이벤트 </title>
+</head>
+<body>
+<!-- 
+href="javascript:... > : href 의 원래 기능인 다른 페이지로 이동을
+                         자바스크립트 문장 실행하도록 수정함.
+onmouseover : 마우스커서가 영역내부에 들어온 경우
+onmouseout  : 마우스커서가 영역외부에 있는 경우                         
+ -->
+<a href="javascript:alert('마우스클릭금지')" 
+   onmouseover='document.bgColor="red"'
+   onmouseout='document.bgColor="white"'>
+   마우스 커서가 이곳에 들어 오면 바탕색이 빨강색으로 
+   벗어나면 흰색으로 변경됨
+</a>   
+</body>
+</html>

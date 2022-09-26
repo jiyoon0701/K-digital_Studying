@@ -28,50 +28,109 @@
      ]
    let worlds = [] //화면에 표시될 단어 목록
    let colors = ["red","blue","green","grey","orange","black"]
-   
-   window.onload=function() {
+   //onload : 윈도우 준비완료. 리스너.
+   //이벤트 핸들러 : 이벤트 발생시 실행 되는 함수
+   window.onload=function() { 
 	   //setInterval(함수,밀리초) : 2초에 한번씩 createMode 함수 실행 
 	 cm = setInterval(createMode, 2000);
 	   //0.5초마다 화면에서 단어를 아래로 이동
+	   //0.5초에 한번씩 moveMode함수 호출
 	 mm = setInterval(moveMode, 500);
    }
    //자바스크립트로 클래스 생성
    function MovingChar() {  //생성자
 	   //멤버 변수 : h3,x,y,vX,vY
+	   //<h3 style='position:absolute; color:red;'>정국</h3> 태그 생성
 	   this.h3 = document.createElement('h3') //h3태그 생성
-	   this.h3.innerHTML = randomData()  //h3태그에 이름 저장 
-	   this.x = random(400) // x좌표 위치
-	   this.y=0             // y좌표 위치
+	   this.h3.innerHTML = randomData()  //h3태그에 선택된 이름을 저장 
+	   this.x = random(400) // x좌표 위치, 399
+	   this.y=0             // y좌표 위치,  0
 	   this.vX = 0          // x좌표 증가분 
 	   this.vY = 10         // y좌표 증가분
 	   this.h3.style.position = 'absolute'
+	   //random(5) : 0~4사이의 임의의 정수값 리턴 
 	   this.h3.style.color = colors[random(5)] //h3태그의 색상 설정
-	   //div 태그에 h3 태그 추가
+	   //div 태그에 h3 태그 추가 => main 영역에 추가
 	   document.querySelector("#main").appendChild(this.h3)
    }
    //MovingChar 클래스의 멤버 함수 정의
    MovingChar.prototype.move = function(){
+	   //this.x : 399 
+	   //this.h3.innerHTML.length : 2
 	   if((this.x+this.h3.innerHTML.length)>400) {
-		   this.x = 400 - (this.innerHTML.length+1)
+		   //main  영역에서 400 위치 밖으로 벗어나지 않도록 x값 보정
+		   this.x = 400 - (this.innerHTML.length+1) //397
 	   }
-	   this.y += this.vY
+	   this.y += this.vY  //10. 0.5초마다 y값.즉 top의 위치값이 변경 
 	   this.h3.style.left = this.x + 'px'//h3 태그의 왼쪽 위치값을 설정
 	   this.h3.style.top = this.y + 'px' //h3 태그의 위쪽 위치값을 설정
    }
    //MovingChar 클래스의 멤버 함수 정의
-   MovingChar.prototype.remove = function(){
+//   MovingChar.prototype.remove = function(){
 	   //div 태그에서 h3태그 제거.
-		document.querySelector("#main").removeChild(this.h3)   
-   }
+//		document.querySelector("#main").removeChild(this.h3)   
+//   }
    function createMode() {
+	   //worlds.push : 배열에 객체를 추가 
 	   worlds.push(new MovingChar())
    }
    
+   function moveMode() {
+	   //worlds 배열의 모든 MovingChar 객체 요소들
+	   //i : MovingChar 객체의 인덱스 값
+	 for (let i in worlds) {
+		 //worlds[i] :MovingChar 객체
+	   worlds[i].move(); //h3태그의 top 위치가 10씩 이동
+	   if(worlds[i].y>=500) {  //바닦에 도착하는 경우
+	     //removeChild : 요소를 제거
+	     document.getElementById("main").removeChild(worlds[i].h3);
+		 delete (worlds[i]) //worlds 배열에서도 제거
+		 //clearInterval : setInterval로 설정된 함수 실행을 멈춤
+	     clearInterval(cm);
+		 clearInterval(mm);
+		 for(let j in worlds) {
+		   // 화면에 보여지는 H3태그의 색상을 회색으로 모두 변경
+		   worlds[j].h3.style.color = "gray" 
+		 }
+         alert("게임 종료")
+	   }
+	 } 
+   }
+   function random(num) {
+	 let num1 = Math.random()* num; //0 <= x <400 사이의 실수값
+	 num1 = parseInt(num1); //정수형 <= 실수형
+	 return num1;
+   }
+   function randomData() {
+	 let num1 = Math.floor(Math.random()* 3); //0~2사이의 임의의 수
+	 //datas[0].length : 소녀시대이름을 가진 배열의 길이
+	 //datas[1].length : BTS이름을 가진 배열의 길이
+	 //num2 : 소녀시대 또는 BTS 또느 트와이스 의 배열의 요소의 인덱스
+	 let num2 = Math.floor(Math.random()* datas[num1].length);
+	 return datas[num1][num2]; //임의의 이름 한개를 리턴 
+   } 
+   function deleteMode(str) {
+     //str : 입력한 이름
+	 for (let i in worlds) {
+	   worlds[i].move();
+	   if(worlds[i].h3.innerHTML == str) {
+		   //main 영역에서 이름에 해당하는 h3태그 제거
+	     document.querySelector("#main").removeChild(worlds[i].h3);
+		 delete (worlds[i]) //worlds 배열에서도 제거 
+	   }
+	 }
+	 document.querySelector("#input").value=""; //입력된 내용 제거
+	 document.querySelector("#input").focus();  //입력란에 제어를 이동
+   }   
 </script>
 </head>
 <body>
 <div id="main"></div>
 <div style="width:400px">
+<!-- onchange : 값이 변경 되는 경우   -
+  this : text 객체
+  this.value : 입력한 값
+-->
 <input type="text" onchange="deleteMode(this.value)" id="input">
 </div>
 </body>

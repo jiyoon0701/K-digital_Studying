@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>초를 시간으로 환산하기</title>
+<style type="text/css">
+   .inum {
+      width : 150px;
+      text-align: right;
+   }
+   .rnum {
+      width : 70px;
+      text-align: right;
+   }
+</style>
+<script>
+	function ok(){
+/*		
+		let s = document.getElementById("sec").value;
+		let s = document.querySelector("#sec").value;
+		let s = sec.value;
+		hour.value = (s-s%3600)/3600; //시간 정보
+		document.getElementById("hour").value = Math.floor(s/3600);
+		temp = s%3600;
+		min.value = (temp - temp%60)/60
+		min.value = Math.floor(temp/60)
+		temp = s%60;
+		second.value = temp;
+		second.value = s%60;
+*/		
+		let s = sec.value;
+		hour.value = (s-s%3600)/3600; //시간 정보
+		temp = s%3600;
+		min.value = Math.floor(temp/60)
+		second.value = s%60;
+	}
+</script>
+
+</head>
+<body>
+ 초 : <input type="text" id="sec" class="inum">
+ <input type="button" value="시분초로 환산" onclick="ok()"><br>
+ <input type="text" id="hour" class="rnum">시간
+ <input type="text" id="min" class="rnum">분
+ <input type="text" id="second" class="rnum">초
+</body>
+</html>

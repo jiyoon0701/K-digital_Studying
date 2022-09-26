@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>약수 구하기</title>
+<style type="text/css">
+ table { width:100%; border-collapse: collapse;}
+ th,td {border : 3px solid #bcbcbc; 
+        text-align: center; padding: 8px;}
+ th {background-color: #e2e2e2; color:#111111;}
+ td {background-color: #f2f2f2;}
+ caption {color:#111111; font-size: 20px; 
+          background-color: #ffffff;}
+.rnum {
+      width : 70px;
+      text-align: right;
+   }
+</style>
+
+<script type="text/javascript">
+   function divednum(num) {
+	   html = "<table width='100%'><caption>"
+	          +num+"의 약수</caption><tr>";
+	   for(let i=1;i<=num;i++) {
+		   if(num%i ==0) {
+			   html += "<td>"+i + "</td>";
+		   }
+	   } 
+	   html += "</tr></table>";
+	   result.innerHTML = html;
+   }
+</script>
+</head>
+<body>
+<input type="text" id="num" class="rnum">
+<input type="button" value="약수구하기"  
+       onclick="divednum(num.value)">
+
+<div style="width:300px;" id="result"></div>       
+</body>
+</html>

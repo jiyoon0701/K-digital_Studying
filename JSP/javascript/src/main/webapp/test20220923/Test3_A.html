@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- src/main/webapp/20220923/exam1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>달력 출력하기</title>
+<style type="text/css">
+ table { width:100%; border-collapse: collapse;}
+ th,td {border : 3px solid #bcbcbc; 
+        text-align: center; padding: 8px;}
+ th {background-color: #e2e2e2; color:#111111;}
+ td {background-color: #f2f2f2;}
+ caption {color:#111111; font-size: 20px; 
+          background-color: #ffffff;}
+ /* class 속성의 값이 text-red 인 태그*/         
+ .text-red { color : red;}
+ .text-blue { color : blue;} 
+</style>
+<script type="text/javascript">
+ function show_cal() {
+	let year = document.f.year.value;
+	html = "<table><caption>" + year + "년</caption>";
+	for(let mon=1;mon<=12;mon++) {
+	   if((mon-1)%4 == 0)   html += "<tr>"; //달력을 구현할 행
+	   cal1 = new Date(year,mon-1,1); //월의 1일
+	   cal2 = new Date(year,mon,1);   //월의 마지막일
+	   cal2.setTime(cal2.getTime()-(1000*60*60*24));
+	   let monstr = "<td valign='top' style='padding:10px;'>"
+	         + "<table class='mon'><caption>"+ mon+"월</caption>";
+       monstr += "<tr class='mon'><th class='mon'>일</th>"
+              + "<th class='mon'>월</th><th class='mon'>화</th>"
+              + "<th class='mon'>수</th><th class='mon'>목</th>"
+            + "<th class='mon'>금</th><th class='mon'>토</th></tr>";
+       week = cal1.getDay(); //1일의 요일 숫자
+       day = 0;
+       for(let i=0;i<6;i++) {
+    	   monstr += "<tr>"
+    	  for(let j=0;j<7;j++) { 
+    	  	if(j==0) monstr +="<td class='text-red'>"; //일요일부분
+    		else if (j==6) monstr +="<td  class='text-blue'>"; //토요일부분
+    		else monstr +="<td class='mon'>"; //평일부분
+    		if(i==0) { //첫번쨰 주
+    			if(week <= j)  monstr += ++day;
+    			else monstr += "&nbsp;"
+    		} else {
+				if (cal2.getDate() > day) monstr += ++day;
+				else monstr += "&nbsp;";
+    		}
+    		monstr +="</td>";
+    	  }
+    	  monstr += "</tr>"
+       	  if(day >= cal2.getDate()) break;
+       }
+	   monstr += "</table></td>";
+	   html += monstr;
+	   if((mon-1)%4 == 3)   html += "</tr>";
+      } 
+	  html +="</table>"
+	  console.log(html)
+      calandar.innerHTML = html;
+   }
+</script>     
+<body>
+<form name="f">
+<select name="year" >
+  <option value="2020">2020년</option>
+  <option value="2021">2021년</option>
+  <option value="2022">2022년</option>
+  <option value="2023">2023년</option>
+  <option value="2024">2024년</option>
+</select>
+<input type="button" value="달력보기" onclick="show_cal()">
+<div id="calandar"></div>
+</form>
+</body>
+</html>

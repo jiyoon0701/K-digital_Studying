@@ -1,0 +1,54 @@
+
+body {
+    font-family: 'Nanum Gothic', serif;
+    margin: 0 0 0 50px;
+    min-width:500px;
+    background-color: #FAFAFA;
+}
+.section-title {
+    padding-left: 20px;
+    border-left: 5px double #00A388;
+}
+.register-box {
+    background-color: white;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    border-color: black;
+    box-shadow: 3px 3px 10px black;
+    padding: 20px;
+    width: 550px;
+    position: relative;
+    float: left;
+}
+
+.result-box {
+    background-color: white;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    border-color: black;
+    box-shadow: 3px 3px 10px black;
+    padding: 20px;
+    width: 550px;
+    position: absolute;
+	left : 50px;
+	top : 1000px;
+ }
+.register-unit {
+    padding-bottom: 20px;
+}
+.register-unit-title {
+    display: inline-block;
+    width: 150px;
+}
+.register-notice {
+    margin-left:150px;
+    font-size:10pt;
+    color: crimson;
+}
+
+.register-button {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    width: 150px;
+}

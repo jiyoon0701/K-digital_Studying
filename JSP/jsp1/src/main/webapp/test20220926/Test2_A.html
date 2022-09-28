@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!-- /WebContent/test2.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>select 태그 연습</title>
+<script type="text/javascript">
+   function nameprint(s) {
+//	   let fruit = prompt(s.options[s.selectedIndex].value);
+//s.value : select 객체가 선택한 값
+	   let fruit = prompt(s.value);
+	   if(fruit != null) { //prompt 창에서 확인버튼이 클릭된 경우
+		   //fruit : 입력한 값 
+		   //s.options : s 객체의 하위 option 객체들
+		   //s.selectedIndex : 선택된 값의 인덱스
+	      s.options[s.selectedIndex] = new Option(fruit);
+	      // 화면에 변경된 값을 출력
+		  s.value = fruit; //select 태그의 내용 중 fruit값을 선택
+	   }
+   }
+</script>
+</head>
+<body>
+문제 : 과일을 선택하면, 선택된 과일을 prompt 창으로 출력하고 다른 과일이름을 입력하면 선택된 과일을 입력된 과일이름으로 변경하기 
+<form name="f">
+   과일: <select name="s" onchange="nameprint(this)">
+      <option>사과</option><option>감</option>
+      <option>배</option><option>딸기</option>
+   </select>
+</form>
+</body>
+</html>

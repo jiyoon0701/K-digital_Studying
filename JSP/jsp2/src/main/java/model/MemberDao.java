@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MemberDao {
@@ -11,7 +12,7 @@ public class MemberDao {
 		Connection conn = DBConnection.getConnection();
 		//2. Statement 객체
 		/*
-		 * PrepareStatement : Statement의 하위 인터페이스
+		 * PreparedStatement : Statement의 하위 인터페이스
 		 *                    미리 sql 문장을 db에 전송
 		 *                    파라미터로 값을 전달 방식
 		 */
@@ -42,35 +43,32 @@ public class MemberDao {
 		}
 		return false;			
 	}
-	
 	public Member selectOne(String id) {
-		//1. Connection 객체
-		Connection conn = DBConnection.getConnection();
-		//2. Statement 객체
-		Member mem = null;
-		/*
-		 * PrepareStatement : Statement의 하위 인터페이스
-		 *                    미리 sql 문장을 db에 전송
-		 *                    파라미터로 값을 전달 방식
-		 */
+		Connection conn =DBConnection.getConnection();
+		String sql = "select * From member where id= ?";
 		PreparedStatement pstmt = null;
-		String sql = "select * from member"
-				+ " where id = (?)";
+		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement(sql); 
-			pstmt.setString(1, id);    //1 : 첫번째 ?
-			//executeUpdate() : select 외에 사용되는 메서드
-			//                  변경되는 레코드 갯수 리턴
-
-			//sql문장실행. 회원정보가 db insert됨
-			mem = (Member) pstmt.executeQuery();
-			if (mem == null) return null;
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			//ResultSet executeQuery : select 구문 실행
+			rs = pstmt.executeQuery();
+			if(rs.next()) { //id에 해당하는 레코드 존재?
+				Member mem = new Member();
+				mem.setId(rs.getString("id"));
+				mem.setPass(rs.getString("pass"));
+				mem.setName(rs.getString("name"));
+				mem.setGender(rs.getInt("gender"));
+				mem.setTel(rs.getString("tel"));
+				mem.setEmail(rs.getString("email"));
+				mem.setPicture(rs.getString("picture"));
+				return mem;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			//return구문 실행되도 실행됨.
-			DBConnection.close(conn, pstmt, null);
+			DBConnection.close(conn, pstmt, rs);
 		}
-		return mem;			
+		return null;
 	}
 }

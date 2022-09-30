@@ -6,3 +6,7 @@ create table book (
    regdate date
 )
 select * from book
+
+delete from book where seq=3
+
+select nvl(max(seq),0) from book

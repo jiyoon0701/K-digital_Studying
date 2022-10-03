@@ -13,5 +13,3 @@ create table member (
 select * from member
 
 delete from member where id=''
-
-w

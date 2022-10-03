@@ -16,6 +16,7 @@
   //1. id 파라미터 조회.
   String id = request.getParameter("id");
   //2. login 정보 조회.
+  out.print(id);
   String login = (String)session.getAttribute("login");
   if (login == null) {  %>
 <script type="text/javascript">

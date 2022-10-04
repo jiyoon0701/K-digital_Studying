@@ -1,2 +1,2 @@
-#Studying
-OrcleDB, JAVA, Javascript, Jsp, Spring
+# Studying
+## OrcleDB, JAVA, Javascript, Jsp, Spring

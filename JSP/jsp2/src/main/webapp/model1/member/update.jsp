@@ -17,6 +17,7 @@
     결과가 false면 수정실패 메세지 출력후 , updateForm.jsp 페이지 이동
 --%>
 <%
+request.setCharacterEncoding("UTF-8");
 // session에 저장되어 있는 id값과 parameter로 받아온 id값이 동일하다면
 String login = (String) session.getAttribute("login");
 String id = request.getParameter("id"); //id 파라미터 저장
@@ -60,3 +61,16 @@ else { %>
 <%
 }
 %>
+
+<!-- String url = "updateForm.jsp?id="+mem.getId();
+   //mem.getPass() : 입력된 비밀번호
+   //dbMem.getPass() : db 등록된 비밀번호 
+   if(mem.getPass().equals(dbMem.getPass())) {
+	   //mem : 입력된 파라미터 정보를 저장
+	  if(dao.update(mem)) {
+		  msg = "회원 정보 수정이 완료되었습니다.";
+		  url = "info.jsp?id="+mem.getId();
+	  } else {
+		  msg = "회원 정보 수정시 오류발생.";
+	  }
+   } -->

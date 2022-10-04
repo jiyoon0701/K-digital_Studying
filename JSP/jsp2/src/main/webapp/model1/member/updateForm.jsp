@@ -30,6 +30,12 @@
 </script>  
 <% } else {
 	Member mem = new MemberDao().selectOne(id); %>    
+	<script type="text/javascript">
+  function win_passchg() {
+	  let op = "width=500,height=250,left=50,top=150"
+	  open("passwordForm.jsp","",op)
+  }
+  </script>
 <!DOCTYPE html>
 <html>
 <head>

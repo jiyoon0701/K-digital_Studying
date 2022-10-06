@@ -22,6 +22,7 @@
          관리자 :  탈퇴 실패 메세지 출력. list.jsp 페이지로 이동         
 --%>    
 <%
+  request.setCharacterEncoding("utf-8");
 //1. 파라미터값 변수에 저장
   String id = request.getParameter("id");
   String pass = request.getParameter("pass");

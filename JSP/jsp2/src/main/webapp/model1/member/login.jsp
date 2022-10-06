@@ -16,6 +16,7 @@
       main.jsp로 페이지 이동.    
 --%>    
 <%
+  request.setCharacterEncoding("UTF-8");
   //1아이디, 비밀번호 파라미터를 변수 저장
   String id = request.getParameter("id"); //입력한 id값.
   String pass = request.getParameter("pass"); //입력한 비밀번호 값.

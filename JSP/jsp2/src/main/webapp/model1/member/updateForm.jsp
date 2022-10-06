@@ -16,7 +16,6 @@
   //1. id 파라미터 조회.
   String id = request.getParameter("id");
   //2. login 정보 조회.
-  out.print(id);
   String login = (String)session.getAttribute("login");
   if (login == null) {  %>
 <script type="text/javascript">
@@ -30,18 +29,22 @@
 </script>  
 <% } else {
 	Member mem = new MemberDao().selectOne(id); %>    
-	<script type="text/javascript">
-  function win_passchg() {
-	  let op = "width=500,height=250,left=50,top=150"
-	  open("passwordForm.jsp","",op)
-  }
-  </script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
 <link rel="stylesheet" href="../../css/main.css">
+<script type="text/javascript">
+  function win_passchg() {
+	  let op = "width=500,height=250,left=50,top=150"
+	  open("passwordForm.jsp","",op)
+  }
+  function win_upload() {
+	   let op = "width=300,height=300,left=50,top=150"
+	   open("memberimg.jsp","",op)
+  }
+</script>
 </head>
 <body>
 <form action="update.jsp" name="f" method="post" 

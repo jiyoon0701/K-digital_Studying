@@ -25,16 +25,18 @@ public class MemberController extends MskimRequestMapping{
     		                     HttpServletResponse response) {
     	return "/view/member/joinForm.jsp"; //forward 됨
     }
-    @RequestMapping("join")
+    
     /*
   1.파라미터값들을 Member 객체에 저장
   2.Member 객체의 내용을 db에 저장
   3.저장성공 : 화면에 내용출력하기
     저장실패 : joinForm.jsp 페이지 이동 
      */
+    @RequestMapping("join")
     public String join(HttpServletRequest request,
             HttpServletResponse response) {
     	try {
+    		System.out.print("join check");
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -256,5 +258,70 @@ public class MemberController extends MskimRequestMapping{
         }
     	//   3. deleteForm.jsp 출력하기   
     	return "/view/member/deleteForm.jsp";
+    }
+    
+    @RequestMapping("delete")
+    public String delete(HttpServletRequest request, HttpServletResponse reponse) {
+    	  try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	//1. 파라미터값 변수에 저장
+    	  String id = request.getParameter("id");
+    	  String pass = request.getParameter("pass");
+    	  String login = (String)request.getSession().getAttribute("login");
+    	//  2. method=POST 여부 확인.
+    	  String msg = null;
+    	  String url = null;
+    	  if( !request.getMethod().equals("POST")) {
+    		  msg = "입력방식이 오류입니다.";
+    		  url = "deleteForm?id="+id;
+    	//3. id가 관리자인경우 탈퇴 불가.  list.jsp 페이지로 이동  
+    	  } else if (id.equals("admin")) {
+    		  msg = "관리자는 탈퇴 불가합니다.";
+    		  url = "list";
+    	//3-1. 로그아웃 상태인 경우 오류 검증  
+    	  } else if (login == null) {	  
+    		  msg = "로그인 하세요";
+    		  url = "loginForm";
+    	//3-2. 본인 탈퇴 검증
+    	  } else if (!login.equals("admin") && !id.equals(login)) {
+    		  msg = "본인만 탈퇴 가능합니다.";
+    		  url = "main";
+    	  } else {  //기본 검증 완료  
+    		 MemberDao dao = new MemberDao();
+    		 Member mem =  dao.selectOne(login);
+    		// 4. 비밀번호 검증
+    		//pass : 입력된 비밀번호
+    		//mem.getPass() : db에 등록된 비밀번호
+    		 if(!pass.equals(mem.getPass())) { //비밀번호 오류
+    		    msg = "비밀번호 오류";
+    		    url = "deleteForm?id="+id;
+    		 } else { //비밀번호 일치
+    	   // 5. 비밀번호 일치하는 경우		 
+    			if(dao.delete(id)) {
+    			    msg = id + " 회원이 탈퇴 되었습니다.";
+    			    if(login.equals("admin")) { //관리자 
+    				    url = "list";
+    			    } else {  //일반 사용자 
+    			    	request.getSession().invalidate(); //로그아웃 
+    				    url = "loginForm";
+    			    }
+    			} else {  //회원 정보 삭제시 db 오류 발생 한 경우 
+    			    msg = id + " 회원 탈퇴 실패";
+    			    if(login.equals("admin")) { //관리자 
+    				    url = "list";
+    			    } else {  //일반 사용자 
+    				    url = "deleteForm?id="+id;
+    			    }
+    			}
+    		 }
+    	  }
+    	request.setAttribute("msg", msg);
+      	request.setAttribute("url", url);
+      	return "/view/alert.jsp";
+    	  
     }
 }

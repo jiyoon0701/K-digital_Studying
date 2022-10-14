@@ -25,18 +25,16 @@ public class MemberController extends MskimRequestMapping{
     		                     HttpServletResponse response) {
     	return "/view/member/joinForm.jsp"; //forward 됨
     }
-    
+    @RequestMapping("join")
     /*
   1.파라미터값들을 Member 객체에 저장
   2.Member 객체의 내용을 db에 저장
   3.저장성공 : 화면에 내용출력하기
     저장실패 : joinForm.jsp 페이지 이동 
      */
-    @RequestMapping("join")
     public String join(HttpServletRequest request,
             HttpServletResponse response) {
     	try {
-    		System.out.print("join check");
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

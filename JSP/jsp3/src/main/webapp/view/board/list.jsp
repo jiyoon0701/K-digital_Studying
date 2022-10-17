@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="pageContext.request.contextPath" />    
 <%-- /jsp3/src/main/webapp/view/board/list.jsp --%>    
 <!DOCTYPE html>
@@ -33,17 +32,11 @@
 			<c:forEach var="b" items="${list}">
 				<tr>
 					<td>${boardnum}</td>
- 					<c:set var="boardnum" value="${boardnum - 1}"/>
+					<c:set var="boardnum" value="${boardnum - 1}"/>
 					<td>
-					<c:if test="${b.grplevel > 0}">
-					<img src="../image/level.gif" 
-					     width="${20*(b.grplevel-1)}">
-					<img src="../image/re.gif">
-					</c:if>
-				 <a href="info?num=${b.num}">${b.subject}</a>
-				 </td>
+				 <a href="info?num=${b.num}">${b.subject}</a></td>
 					<td>${b.writer}</td>
-					<td><fmt:formatDate value="${b.regdate}" pattern="yy-MM-dd HH:mm"/></td>
+					<td>${b.regdate}</td>
 				<td><a href="../upload/${b.file1}">${b.file1}</a></td>
 					<td>${b.readcnt}</td>
 				</tr>

@@ -108,7 +108,7 @@ public class BoardDao {
 			  b.setGrpstep(rs.getInt("grpstep"));
 			  b.setGrplevel(rs.getInt("grplevel"));
 			  b.setReadcnt(rs.getInt("readcnt"));
-			  b.setRegdate(rs.getDate("regdate"));
+			  b.setRegdate(rs.getTimestamp("regdate"));
 			  list.add(b);				
 			}
 			return list;
@@ -131,6 +131,7 @@ public class BoardDao {
 			if(rs.next()) {
 				Board b = new Board();
 				b.setNum(rs.getInt("num"));
+				b.setBoardid(rs.getString("boardid"));
 				b.setWriter(rs.getString("writer"));
 				b.setPass(rs.getString("pass"));
 				b.setSubject(rs.getString("subject"));
@@ -185,5 +186,36 @@ public class BoardDao {
 			DBConnection.close(conn, pstmt, null);
 		}
 		return false;
+	}
+	public boolean delete(int num) {
+		String sql = "delete from board where num=?";
+		Connection conn = DBConnection.getConnection();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,num);
+			return pstmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(conn, pstmt, null);
+		}
+		return false;
+	}
+	public void grpStepAdd(int grp, int grpstep) {
+		String sql = "update board set grpstep = grpstep + 1 "
+				+ " where grp=? and grpstep > ?";
+		Connection conn = DBConnection.getConnection();
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, grp);
+			pstmt.setInt(2, grpstep);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConnection.close(conn, pstmt, null);
+		}
 	}
 }

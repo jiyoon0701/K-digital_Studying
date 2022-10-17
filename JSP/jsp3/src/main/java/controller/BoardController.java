@@ -258,5 +258,85 @@ public class BoardController extends MskimRequestMapping{
 	 request.setAttribute("url", url);
 	 return "/view/alert.jsp";
 	}
-	
+	@RequestMapping("deleteForm")
+   	public String deleteForm(HttpServletRequest request, HttpServletResponse response) {
+		 return "/view/board/deleteForm.jsp";
+	}
+	@RequestMapping("delete")
+   	public String delete(HttpServletRequest request, HttpServletResponse response) {
+		int num = Integer.parseInt(request.getParameter("num"));
+		String pass = request.getParameter("pass");
+		Board board = dao.selectOne(num);
+		String msg = "비밀번호가 틀립니다.";
+		String url = "deleteForm?num="+num;
+		if(pass.equals(board.getPass())) {
+			if(dao.delete(num)) {
+			  msg = board.getWriter()+"님의 게시글이 삭제 되었습니다.";
+			} else {
+				  msg = "게시글이 삭제시 오류가 있습니다.";	
+			}
+		    url = "list?boardid="+board.getBoardid();
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("url", url);
+		return "/view/alert.jsp";
+	}
+	@RequestMapping("replyForm")
+   	public String replyForm(HttpServletRequest request, HttpServletResponse response) {
+        int num = Integer.parseInt(request.getParameter("num"));
+        Board board = dao.selectOne(num);
+        request.setAttribute("board", board);
+		return "/view/board/replyForm.jsp";
+	}
+	/*
+	 * 1. 파라미터값을 Board 객체에 저장하기
+	 *   원글정보 : num,boardid,grp,grplevel, grpstep
+	 *   답글정보 : writer,pass,subject,content => 입력내용
+	 * 2. 같은 grp 해당하는 게시물들의 grpstep를 1씩 증가하기 .
+	 *    원글의 grpstep보다 큰 grpstep만 증가  
+	 * 3. 답글정보를 db에 추가하기.
+	 *    num : maxnum + 1
+	 *    grp : 원글과 동일
+	 *    grplevel : 원글 + 1
+	 *    grpstep  : 원글 + 1
+	 * 4. 등록성공 : 답변등록 완료 메세지 추가후 list로 페이지 이동   
+	 *    등록실패 : 답변등록 실폐 메세지 추가후 replyForm로 페이지 이동
+	 */
+	@RequestMapping("reply")
+   	public String reply(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		Board board = new Board();
+		board.setWriter(request.getParameter("writer"));
+		board.setPass(request.getParameter("pass"));
+		board.setSubject(request.getParameter("subject"));
+		board.setContent(request.getParameter("content"));
+		board.setBoardid(request.getParameter("boardid"));
+		board.setGrp
+		   (Integer.parseInt(request.getParameter("grp")));
+		int num = Integer.parseInt(request.getParameter("num"));
+		int grp = Integer.parseInt(request.getParameter("grp"));
+		int grplevel= Integer.parseInt(request.getParameter("grplevel"));
+		int grpstep= Integer.parseInt(request.getParameter("grpstep"));
+		//2 grpstep 1 증가
+		dao.grpStepAdd(grp,grpstep);
+		//3 답글 db insert
+		board.setNum(dao.maxnum() + 1);
+		board.setGrplevel(grplevel + 1);
+		board.setGrpstep(grpstep + 1); //원글 다음자리
+		board.setFile1("");
+		String msg = "답변 등록시 오류가 발생했습니다.";
+		String url = "replyForm?num="+num;
+		if(dao.insert(board)) {
+			msg = "답변 등록 완료";
+			url = "list?boardid="+board.getBoardid();
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("url", url);
+		return "/view/alert.jsp";
+	}
 }
+

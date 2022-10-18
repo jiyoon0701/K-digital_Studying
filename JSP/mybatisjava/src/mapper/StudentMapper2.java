@@ -48,5 +48,57 @@ public interface StudentMapper2 {
  *   map : null 
  *   select * from student  => 모든 데이터 조회
  *  
- */  
+ */
+	@Select({"<script>",
+		"select * from student ",
+		"<trim prefix='where' prefixOverrides='AND||OR'>",
+		"<if test='grade != null'>and grade = #{grade}</if>",
+		"<if test='height != null'>and height >= #{height}</if>",
+		"</trim>",
+		"</script>"
+	})
+	List<Student> select2(Map<String, Object> map);
+	/* map : grade:1, height:175
+	 * 
+	 * select * from student 
+	 * where grade = #{grade}
+	 * and height >= #{height}
+	 * 
+	 * map : height:175	  
+	 * select * from student where height >= #{height}
+	 * 
+	 * map : grade:2
+	 * select * from student where grade = #{grade}
+	 * 
+	 * map : null
+	 * select * from student 
+	 */
+	
+	// grade,height 중 한개만 입력될때 사용되는 동적 sql 구문
+	@Select({"<script>",
+		"select * from student ",
+		"<if test='grade != null'>where grade = #{grade}</if>",
+		"<if test='height != null'>where height >= #{height}</if>",
+		"</script>"
+	})
+	List<Student> select3(Map<String, Object> map);
+	
+	@Select({"<script>",
+		"select * from student ",
+		"<if test='datas != null'>where ${columns} in "
+		+ "<foreach collection='datas' item='d' separator=',' "
+		+ " open='(' close=')'>#{d}</foreach></if>",
+		"</script>"})
+	List<Student> select4(Map<String, Object> map);
+	/*
+	 * datas : [101,201,301]
+	 * columns : "deptno1"
+	 * 
+	 * select * from student where deptno1 in (101,201,301)
+	 * 
+	 * datas : ["이서진","구유미","일지매"]
+	 * columns : "name"
+     * select * from student where name in ('이서진','구유미','일지매')
+	 */
+	
 }

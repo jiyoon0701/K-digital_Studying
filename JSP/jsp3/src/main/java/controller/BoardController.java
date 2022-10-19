@@ -3,6 +3,7 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +17,12 @@ import kic.mskim.MskimRequestMapping;
 import kic.mskim.RequestMapping;
 import model.Board;
 import model.BoardDao;
+import model.BoardMybatisDao;
 //http://localhost:8088/jsp3/board/*
 @WebServlet("/board/*")
 public class BoardController extends MskimRequestMapping{
-	private BoardDao dao = new BoardDao();
+//	private BoardDao dao = new BoardDao();
+	private BoardMybatisDao dao = new BoardMybatisDao();
 	
 	//http://localhost:8088/jsp3/board/writeForm
 	@RequestMapping("writeForm")
@@ -126,14 +129,26 @@ public class BoardController extends MskimRequestMapping{
 			pageNum = "1"; 
 		}
 		pageInt = Integer.parseInt(pageNum);
+// 검색 관련 파라미터 저장
+		String column = request.getParameter("column");
+		String find = request.getParameter("find");
+		if(column == null || find==null) {
+			column = null;
+			find=null;
+		}
+		if(find==null || find.trim().equals("")) {
+			column = null;
+			find=null;
+		}
 /*  문제
  *     dao.boardCount(boardid) :
  *         board 테이블의 boardid값에 해당하는 게시물 건수 리턴
  */
 		// boardcount : 게시판 종류별 등록된 게시물 건수
-		int boardcount = dao.boardCount(boardid);
+		int boardcount = dao.boardCount(boardid,column,find);
 		//list : pageInt에 해당하는 등록된 게시물 목록
-		List<Board> list = dao.list(pageInt, limit, boardid);
+		List<Board> list = dao.list
+				         (pageInt, limit, boardid,column,find);
 		//pageInt : 2.   boardcount:15,  boardnum:5
 		// 페이지가 시작되는 첫번째 게시물 num 값 
 		int boardnum = boardcount - (pageInt - 1) * limit;
@@ -183,6 +198,7 @@ public class BoardController extends MskimRequestMapping{
 		request.setAttribute("bottomLine", bottomLine);//한페이지에 보여질 페이지 갯수
 		request.setAttribute("endPage", endPage);     //페이지의 끝페이지번호
 		request.setAttribute("maxPage", maxPage);     //최대 페이지 번호 
+		request.setAttribute("today", new Date());
 		return "/view/board/list.jsp";
 	}
 	@RequestMapping("info")
@@ -327,7 +343,8 @@ public class BoardController extends MskimRequestMapping{
 		board.setNum(dao.maxnum() + 1);
 		board.setGrplevel(grplevel + 1);
 		board.setGrpstep(grpstep + 1); //원글 다음자리
-		board.setFile1("");
+		board.setFile1(""); 
+	    board.setIp(request.getLocalAddr());
 		String msg = "답변 등록시 오류가 발생했습니다.";
 		String url = "replyForm?num="+num;
 		if(dao.insert(board)) {
@@ -339,4 +356,3 @@ public class BoardController extends MskimRequestMapping{
 		return "/view/alert.jsp";
 	}
 }
-

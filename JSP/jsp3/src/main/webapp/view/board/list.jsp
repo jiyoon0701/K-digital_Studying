@@ -9,11 +9,42 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 목록</title>
+<script type="text/javascript">
+   function listsubmit(page) { 
+	   f = document.sf;
+	   f.pageNum.value=page;
+	   f.submit();
+   }
+</script>
 </head>
 <body>
 	<!-- table list start -->
-	<div class="container">
-		<h2  id="center">${boardName}</h2>
+<div class="container">
+   <h2  id="center">${boardName}</h2>
+	<div  class="container justify-content-end text-center">
+		<form class="form-inline" action="list?boardid=${boardid}" 
+		   method="post" name="sf">
+		   <input type="hidden" name="pageNum" value="1" >
+	       <select  class="form-control" name="column" >
+<%-- 		 <option value="writer" <c:if test='${param.column=="writer"}'>selected</c:if>>글쓴이</option>
+			 <option value="subject" <c:if test='${param.column=="subject"}'>selected</c:if>>제목</option>
+			 <option value="content" <c:if test='${param.column=="content"}'>selected</c:if>>내용</option>
+ --%>
+ 		     <option value="writer" >글쓴이</option>
+			 <option value="subject">제목</option>
+			 <option value="content">내용</option>
+ 		   </select>
+		   <script type="text/javascript">
+		     if('${param.column}' != '' )
+		        document.sf.column.value = '${param.column}'
+		   </script>
+
+			<input class="form-control mr-sm-2" type="text"
+				placeholder="Search" name="find" value="${param.find}">
+			<button class="btn btn-success" type="submit">Search</button>
+		</form>
+   </div>
+   
 	    <p align="right">
 	     <c:if test="${boardcount > 0}">글개수:${boardcount}</c:if>	    
 	     <c:if test="${boardcount == 0}">등록된 게시물이 없습니다</c:if>	    
@@ -43,7 +74,18 @@
 				 <a href="info?num=${b.num}">${b.subject}</a>
 				 </td>
 					<td>${b.writer}</td>
-					<td><fmt:formatDate value="${b.regdate}" pattern="yy-MM-dd HH:mm"/></td>
+					<td>
+<%-- 오늘 등록한 게시물 : HH:mm:ss
+     이전일에 등록한 게시물 : yyyy-MM-dd HH:mm 출력하기 --%>	
+<fmt:formatDate value="${today}" pattern="yyyyMMdd" var="t"/>
+<fmt:formatDate value="${b.regdate}" pattern="yyyyMMdd" var="r"/>
+<c:if test="${t == r}">
+   <fmt:formatDate value="${b.regdate}" pattern="HH:mm:ss"/>
+</c:if>     				
+<c:if test="${t != r}">
+   <fmt:formatDate value="${b.regdate}" pattern="yyyy-MM-dd HH:mm"/>
+</c:if>     				
+      </td>
 				<td><a href="../upload/${b.file1}">${b.file1}</a></td>
 					<td>${b.readcnt}</td>
 				</tr>
@@ -60,16 +102,22 @@
 		<ul class="pagination justify-content-center"  >
    <li class="page-item 
       <c:if test='${startPage <= bottomLine}'>disabled</c:if>">
-   <a class="page-link" href="list?pageNum=${startPage-bottomLine}">
+<%--    <a class="page-link" href="list?pageNum=${startPage-bottomLine}">  --%>
+   <a class="page-link" 
+      href="javascript:listsubmit(${startPage-bottomLine})">
    Previous</a></li>
    <c:forEach var="i" begin="${startPage}" end="${endPage}">
   <li class="page-item <c:if test='${i==pageInt}'> active </c:if>">
-    <a class="page-link" href="list?pageNum=${i}">${i}</a>
+<%--  <a class="page-link" href="list?pageNum=${i}">${i}</a> --%>
+   <a class="page-link" href="javascript:listsubmit(${i})">${i}</a>
   </li></c:forEach>
   <li class="page-item 
      <c:if test='${endPage >= maxPage}'>disabled</c:if>">
- <a class="page-link" href="list?pageNum=${startPage+bottomLine}">
-  Next</a></li> 
+<%--  <a class="page-link" href="list?pageNum=${startPage+bottomLine}"> --%>
+ <a class="page-link" 
+    href="javascript:listsubmit(${startPage+bottomLine})">
+  Next</a>
+  </li> 
 </ul> </div>
 	</div>
 	<!-- table list end -->

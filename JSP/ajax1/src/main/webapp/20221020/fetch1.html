@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!--  /ajax1/src/main/webapp/20221020/fetch1.html
+  JSON 파일 : Javascript Object Notation 약자 
+-->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>fetch 함수 이용</title>
+<script type="text/javascript">
+  //get 방식을 이용하여 fetch 함수로 서버에 요청
+  function loadJspGet() {
+   fetch('test1.jsp?name='+document.f.name.value)
+   .then((response)=> response.text())
+   .then((data)=> document.querySelector("#demo").innerHTML=data)
+  }
+  function loadJspPost() {
+	fetch('test1.jsp',{
+	  method : "POST",
+	  headers :
+{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+      body : 'name='+document.f.name.value
+	})
+	.then((r)=> r.text())
+	.then((data)=> document.querySelector("#demo").innerHTML=data)
+  }  
+</script>
+</head>
+<body>
+<h2>fetch 함수 이용</h2>
+<form name="f"><input type="text" name="name"></form>
+<button type="button" onclick="loadJspGet()">입력(get)</button>
+<button type="button" onclick="loadJspPost()">입력(post)</button>
+<div id="demo"></div>
+</body>
+</html>

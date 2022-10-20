@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- /ajax1/src/main/webapp/20221020/fetch2.html  -->
+<html><head><meta charset="UTF-8">
+<title>fetch 함수 이용</title>
+<script>
+	function load(url) {
+		//r.json() : json형태로 분석하여 객체로 리턴 
+	    fetch(url)
+	    .then ((r) => r.json())
+	    .then ((data) => {
+	        let area = document.querySelector("#area")
+	        for (s of data) {
+				area.innerHTML +='<p>'+s.author.book 
+				+","+s.author.pubDate+'</p>'
+			}
+	    	
+	    })
+	}
+</script></head>
+<body>
+<input type="button" value="json읽기" onclick="load('test2.json')">
+<div id="area"></div>
+</body>
+</html>

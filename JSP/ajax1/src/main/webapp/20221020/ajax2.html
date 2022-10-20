@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- /ajax1/src/main/webapp/20221020/ajax2.html -->
+<html><head>
+<meta charset="UTF-8">
+<title>XMLHttpRequest 예제</title>
+<script type="text/javascript">
+  function load(url) {
+	  const xhttp=new XMLHttpRequest()
+	  xhttp.open("GET",url)
+	  xhttp.send()
+	  xhttp.onreadystatechange=callBack
+  }
+  function callBack() {
+	if (this.readyState == 4 && this.status == 200) {
+		alert(this.responseText)
+		let area=document.querySelector("#area")
+		//this.responseText : 문자열데이터
+		//JSON.parse : JSON 객체로 변환
+		//data : 배열 {author : {}} 형태
+		let data = JSON.parse(this.responseText)
+		//s : {"author" : {"book":"자바", "pubDate": "2022-05-22"}}
+		for (s of data) {
+			//s.author.book : 자바
+			//s.author.pubDate : 2022-05-22
+			area.innerHTML+='<p>'+s.author.book 
+			+","+s.author.pubDate+'</p>'
+		}
+	}		  
+ }
+</script>
+</head><body>
+<input type="button" value="json읽기" onclick="load('test2.json')">
+<div id="area"></div>
+</body></html>

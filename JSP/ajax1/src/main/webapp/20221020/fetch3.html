@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- /ajax1/src/main/webapp/20221020/fetch3.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>fetch3 예제</title>
+<script>
+window.onload = function() {
+    fetch("test3.jsp")
+    .then ((r) => r.text())
+    .then ((data) => {
+    	  console.log(data)
+		  const nums = data.split(",")
+		  let max = parseFloat(nums[0])
+		  for(let i=1;i<nums.length;i++) {
+			  nums[i] = parseFloat(nums[i])
+			  if(max < nums[i]) max=nums[i]
+		  }  alert(max)
+		  document.querySelector("#result").innerHTML = 
+				  "<strong>"+max + "</strong>"	    	
+	    })
+	}
+</script>
+</head>
+<body>
+<div id="result"></div>
+</body>
+</html>

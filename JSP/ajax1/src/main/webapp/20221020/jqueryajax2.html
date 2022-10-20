@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--  /ajax1/src/main/webapp/20221020/jqueryajax2.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquery ajax 파라미터 전송</title>
+<script type="text/javascript" 
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(function(){
+  $("#btn1").click(function(){
+	  //serialize() : form에 속한 모든 파라미터들을 전송할 수 있도록
+	  //              파라미터 형태의 문자열로 생성
+	  const param = $("form[name=ajaxForm]").serialize()
+//      const param = "name="+$("input[name=name]").val()
+//                  + "&city="+$("input[name=city]").val()
+// $("input[name=name]").val() :
+// $("input[name=name]") : name 속성의 값이 name인 input태그 
+// $("input[name=city]") : name 속성의 값이 city인 input태그
+// val() : value 속성값 리턴
+// val(값) : value 값에 저장 
+// html() : innerHTML의 값 리턴
+// html(값) : innerHTML 값에 저장
+	  console.log(param)
+	  $.ajax({
+		 url :"jqueryajax2.jsp",
+		 type:"POST",
+		 data:param,
+		 success:function(data) {
+			 $("body").append(data)
+		 },
+		 error : function(e) {
+			 alert("서버오류:"+e.status);
+		 }
+	  })
+  })
+  //rmbtn1 버튼클릭시 내용 제거 하는 프로그램 구현하기
+  $("#rmbtn1").click(function(){
+//	  $("h2").get(-1).remove() //h2태그 중 마지막 태그 삭제
+	  $("h2").get(0).remove()  //h2태그 중 첫번째 태그 삭제
+  })
+})
+</script></head><body>
+<button id="btn1">jqueryajax2.jsp</button>
+<button id="rmbtn1">jqueryajax2.jsp의 추가 내용 제거</button>
+<form  name="ajaxForm"  method="post">
+<input type="text" name="name"><input type="text" name="city">
+</form></body></html>

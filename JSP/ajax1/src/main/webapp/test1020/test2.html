@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- /ajax1/src/main/webapp/test1020/test2.html --> 
+<html>
+<head>
+<meta charset="UTF-8">
+<title>우편번호 보기</title>
+<script type="text/javascript">
+function doJson(){
+	let a = "";
+	let result = document.querySelector("#result")
+	a ='<table border="1"><tr><th>우편번호</th><th>읍면동</th><th>주소</th></tr>'
+	fetch("test2.jsp")
+	.then((response) => (response.json()))
+	.then((data)=>{
+		for (s of data['ZIP']){
+			a+='<tr><td>'+s.zipcode+'</td><td>'+s.dong+'</td><td>'+s.addr+'</td></tr>'
+		}
+		a+='</table>'
+		result.innerHTML = a
+	})
+}
+</script>
+</head>
+<body>
+<input type="button" value="우편번호"  onclick="doJson()"><br>
+<div id="result"></div>
+</body>
+</html>

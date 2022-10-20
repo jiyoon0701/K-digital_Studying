@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- /ajax1/src/main/webapp/test1020/test1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JSON 예제</title>
+<script type="text/javascript">
+	function loadJson(location, location2){
+		let a = location+"쪽";
+		fetch("test1.jsp")
+		.then((response)=> response.json())
+		.then((data)=> {
+			let result = document.querySelector("#result")
+			if(location=='all'){
+				result.innerHTML = '<small> 서울 전체 구</small><br>'
+				for(d of Object.getOwnPropertyNames(data)){
+					for(s of data[d]){
+						result.innerHTML+='<small> -'+s+'</small><br>'
+					}
+				}
+			}
+			else{
+				result.innerHTML = '<small> 서울 '+location+'쪽 구</small><br>'
+				for(s of data[location2.toString()]){
+					result.innerHTML+='<small> -'+s+'</small><br>'
+				}
+			}	
+		})
+	}
+</script>
+</head>
+<body>
+	<h1>서울의 구 정보</h1>
+	<input type="button" value="서울 전체 구" onclick="loadJson('all','all')">
+	<input type="button" value="서울 동쪽 구" onclick="loadJson('동','east')">
+	<input type="button" value="서울 서쪽 구" onclick="loadJson('서','west')">
+	<input type="button" value="서울 남쪽 구" onclick="loadJson('남','south')">
+	<input type="button" value="서울 북쪽 구" onclick="loadJson('북','north')">
+	<div id="result"></div>
+</body>
+</html>

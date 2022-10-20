@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- /ajax1/src/main/webapp/20221020/ajax3.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax.js 이용</title>
+<script type="text/javascript" src='../js/ajax.js'></script>
+<script>
+//window.onload : 페이지가 준비가 완료되면. 
+  window.onload = function() {
+//	  ajax("test3.txt",null,getMax,'GET') //요청
+	  ajax("test3.jsp",null,getMax,'GET') //요청
+	  // test3.jsp : 0~ 99 사이의 임의의 값을 10개생성하여
+	  //             ,를 이용하여 문자열변환하여 전달 
+  }
+  function getMax() {  //콜백함수
+	  if(this.readyState == 4 && this.status == 200) {
+		  console.log(this.responseText)
+		  //nums : 배열
+		  const nums = this.responseText.split(",")
+		  //실수형 <= parseFloat(문자열)
+		  let max = parseFloat(nums[0])
+		  for(let i=1;i<nums.length;i++) {
+			  nums[i] = parseFloat(nums[i])
+			  if(max < nums[i]) max=nums[i]
+		  }
+		  alert(max)
+		  document.querySelector("#result").innerHTML = 
+			  "<strong>"+max + "</strong>"
+	  } 
+  }
+</script></head>
+<body>
+<div id="result"></div>
+</body>
+</html>

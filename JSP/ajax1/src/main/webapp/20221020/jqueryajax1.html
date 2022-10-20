@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--  /ajax1/src/main/webapp/20221020/jqueryajax1.html -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquery를 이용한 ajax 연습</title>
+<!--
+https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js 
+CDN 방식 : 네트워으로 javaScript 파일을 전송받는 방식
+jquery를 사용하기 위한 자바스크립트 파일
+ -->
+<script type="text/javascript" 
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+/* $(document).ready(function() {
+	
+   })
+*/
+  $(function(){  //페이지 준비 완료시
+	  //$("#btn1") : id=btn1 태그 선택
+	  //click() : 이벤트
+	  // id=btn1 태그 클릭시
+	  $("#btn1").click(function(){
+		  //$.ajax : ajax으로 서버에 요청.
+		  $.ajax("jqueryajax1.jsp",{
+			  // readyState == 4 이고, status==200 인 경우
+			  success : function(data) {  //정상 완료
+				  //$("body") : body 태그
+				  $("body").append(data)
+			  },
+			  // readyState == 4 이고, status!=200 인 경우
+			  error:function(e) {   //오류 발생
+				  alert("서버오류:"+e.status)
+			  }
+		  })
+	  })
+	  $("#rmbtn1").click(function(){
+		/* 마지막 태그 선택
+		  $("h1") : h1태그들
+		  get(-1) : 마지막 인덱스를 가진 태그 선택
+		  eq(-1) : 마지막 인덱스를 가진 태그 선택
+		  h1:last : h1태그 중 마지막 태그
+		*/
+//		  $("h1").get(-1).remove()
+//		  $("h1").eq(-1).remove()
+//		  $("h1:last").remove()
+  	    /* 첫번째 태그 선택
+		  get(0) : 첫번째 인덱스를 가진 태그 선택
+		  eq(-1) : 마지막 인덱스를 가진 태그 선택
+		  h1:last : h1태그 중 마지막 태그
+		*/
+//		$("h1").get(0).remove()
+//		$("h1").eq(0).remove()
+	    $("h1:first").remove()	  
+	  })
+  })
+</script>
+</head>
+<body>
+<button id="btn1">jqueryajax1.jsp</button>
+<button id="rmbtn1">jqueryajax1.jsp의 추가 내용 제거</button>
+</body>
+</html>

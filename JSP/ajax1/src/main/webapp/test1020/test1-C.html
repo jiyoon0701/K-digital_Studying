@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquery ajax</title>
+<script type="text/javascript" 
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+function loadJson(rtype,tag) {
+  $.ajax("test1.jsp",{
+	 success:function(data){
+	  	   console.log(data);
+	  	   let jsondata = JSON.parse(data); 
+	  	   let divTag = document.getElementById("result");
+	  	   if(rtype == 'all')
+		          divTag.innerHTML = "서울 전체 구";
+		   else
+		          divTag.innerHTML = "서울 "+rtype +"쪽 구";
+	  	   
+	  	   if(tag == 'all') {
+	  		 let state = ['north','south','east','west']
+	  		 for (s of state) {
+	  			 console.log(s)
+	  	  	     for(let i=0;i<jsondata[s].length;i++) {
+	  			   divTag.innerHTML += "<br>-"+ jsondata[s][i];
+	   	         }
+	  		 }
+		   } else {
+		     for(let i=0;i<jsondata[tag].length;i++) {
+				   divTag.innerHTML += "<br>-"+ jsondata[tag][i];
+		     }
+		   }
+	 }
+	 })
+}
+</script></head><body>
+<h1>서울의 구 정보</h1>
+<input type="button" value="서울 전체 구" onclick="loadJson('all','all')">
+<input type="button" value="서울 동쪽 구" onclick="loadJson('동','east')">
+<input type="button" value="서울 서쪽 구" onclick="loadJson('서','west')">
+<input type="button" value="서울 남쪽 구" onclick="loadJson('남','south')">
+<input type="button" value="서울 북쪽 구" onclick="loadJson('북','north')">
+<div id="result"></div>
+</body>
+</html>

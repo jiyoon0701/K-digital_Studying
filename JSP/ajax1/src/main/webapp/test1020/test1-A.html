@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 객체</title>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript">
+  function loadJson(rtype,tag) {
+	  //reqType,reqTag : 전역 변수. 함수내부에 var let 선언문을 사용하지 않으면
+	  //                 해당 변수는 전역변수(모든 함수에서 사용가능한 변수).
+	  reqType = rtype; //동
+	  reqTag = tag;    //east
+	  ajax("test1.jsp",null,parseJson,"GET")
+  }
+  function parseJson() {
+	  if (this.readyState == 4 && this.status == 200) { //정상 완료
+		  //responseText : 서버에서 전송받은 데이터 값
+		  listStates(this.responseText)
+	  } else if(this.readyState == 4 && this.status != 200) { //오류발생
+		  alert("서버오류"+ this.status)
+	  }
+  }
+  function listStates(data) {
+  	   console.log(data);
+  	   let jsondata = JSON.parse(data); //json 객체 저장 
+  	   let divTag = document.getElementById("result");
+  	   if(reqType == 'all')
+	          divTag.innerHTML = "서울 전체 구";
+	   else
+	          divTag.innerHTML = "서울 "+reqType +"쪽 구";
+  	   
+  	   if(reqTag == 'all') {
+  		 let state = ['north','south','east','west']
+  		 for (s of state) {
+  			 console.log(s)
+  			 //jsondata[s] :jsondata['north'] 
+  	  	     for(let i=0;i<jsondata[s].length;i++) {
+  			   divTag.innerHTML += "<br>-"+ jsondata[s][i];
+   	         }
+  		 }
+	   } else {
+	     for(let i=0;i<jsondata[reqTag].length;i++) {
+			   divTag.innerHTML += "<br>-"+ jsondata[reqTag][i];
+	     }
+	   }
+ }
+</script></head><body>
+<h1>서울의 구 정보</h1>
+<input type="button" value="서울 전체 구" onclick="loadJson('all','all')">
+<input type="button" value="서울 동쪽 구" onclick="loadJson('동','east')">
+<input type="button" value="서울 서쪽 구" onclick="loadJson('서','west')">
+<input type="button" value="서울 남쪽 구" onclick="loadJson('남','south')">
+<input type="button" value="서울 북쪽 구" onclick="loadJson('북','north')">
+<div id="result"></div>
+</body>
+</html>

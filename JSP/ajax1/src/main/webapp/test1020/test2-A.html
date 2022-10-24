@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ajax 객체</title>
+<script type="text/javascript" src="../js/ajax.js"></script>
+<script type="text/javascript">
+  function doJson() {
+	ajax("test2.jsp",null,jsonresult,"GET");
+  }
+  function jsonresult() {
+   	  if(this.readyState == 4 && this.status == 200) {
+      		resultView(this.responseText)
+	  } else if(this.readyState == 4 && this.status != 200) {
+		  alert("서버오류"+ this.status)
+      }
+   }
+   function resultView(data) {
+	   htmldata = "<br><table border='1'>"
+	   +"<tr><th>우편번호</th><th>읍면동</th><th>주소</th></tr>";
+      let jsondata = JSON.parse(data); 
+      for(let i=0;i<jsondata.ZIP.length;i++) {
+		  let code = jsondata.ZIP[i].zipcode;
+		  let dong = jsondata.ZIP[i].dong;
+		  let addr = jsondata.ZIP[i].addr;
+		  htmldata += "<tr><td>"+code+"</td><td>"
+		                    +dong+"</td><td>"+addr+"</td></tr>";
+	 }
+     htmldata += "</table>";
+	 result.innerHTML = htmldata;
+   }
+</script>
+</head>
+<body>
+<input type="button" value="우편번호"   onclick="doJson()"><br>
+<div id="result"></div>
+</body>
+</html>

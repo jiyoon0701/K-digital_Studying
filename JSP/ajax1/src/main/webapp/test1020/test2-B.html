@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>fetch 함수</title>
+<script type="text/javascript">
+  function doJson() {
+	fetch("test2.jsp")  
+	.then((r) => r.json())
+	.then((data) => {
+	     htmldata = "<br><table border='1'>"
+		   +"<tr><th>우편번호</th><th>읍면동</th><th>주소</th></tr>";
+	      for(let i=0;i<data.ZIP.length;i++) {
+				  let code = data.ZIP[i].zipcode;
+				  let dong = data.ZIP[i].dong;
+				  let addr = data.ZIP[i].addr;
+				  htmldata += "<tr><td>"+code+"</td><td>"
+				                    +dong+"</td><td>"+addr+"</td></tr>";
+		  }
+		  htmldata += "</table>";
+		  document.querySelector("#result").innerHTML = htmldata;
+	})
+  }
+  
+</script>
+</head>
+<body>
+<input type="button" value="우편번호"   onclick="doJson()"><br>
+<div id="result"></div>
+</body>
+</html>

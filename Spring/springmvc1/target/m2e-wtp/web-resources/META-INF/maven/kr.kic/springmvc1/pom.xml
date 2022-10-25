@@ -10,7 +10,8 @@
 <!-- spring 버전 설정 -->  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring.version>5.2.19.RELEASE</spring.version>
+    <spring.version>4.3.30.RELEASE</spring.version>
+    <spring.version1>5.2.19.RELEASE</spring.version1>
   </properties>
 <!-- maven의 기본 원격 저장소 : https://www.mvnrepository.com/-->
 <!-- maven 환경에서 사용되는 원격 저장소 추가로 설정  -->  
@@ -59,9 +60,24 @@
     <groupId>com.oracle</groupId>
     <artifactId>ojdbc5</artifactId>
     <version>11.2.0.2.0</version>
-</dependency>    
+</dependency> 
+
+<!-- https://mvnrepository.com/artifact/jstl/jstl -->
+<dependency>
+    <groupId>jstl</groupId>
+    <artifactId>jstl</artifactId>
+    <version>1.2</version>
+</dependency>
+   
   </dependencies>
   <build>
     <finalName>springmvc1</finalName>
+    <!-- pom.xml의 첫번째 줄에 plugin 관련 오류 발생시 추가 -->
+    <plugins>
+     <plugin>
+     <artifactId>maven-war-plugin</artifactId>
+     <version>3.2.2</version>
+     </plugin>
+    </plugins>
   </build>
 </project>

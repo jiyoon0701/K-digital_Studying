@@ -12,7 +12,8 @@
 <html><head>
 <meta charset="UTF-8">
 <title>상품 등록</title></head>
-<body><form:form  modelAttribute="item" action="register" 
+<!-- modelAttribute="item" : Item 객체 필요 -->
+<body><form:form modelAttribute="item" action="register" 
       enctype="multipart/form-data">
 <h2>상품 등록</h2>
 <table>

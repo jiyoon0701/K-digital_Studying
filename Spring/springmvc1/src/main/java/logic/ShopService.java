@@ -74,4 +74,7 @@ public class ShopService {
 		}
 	}
 
+	public void itemDelete(Integer id) {
+		itemDao.delete(id);
+	}
 }

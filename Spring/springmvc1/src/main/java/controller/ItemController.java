@@ -110,4 +110,12 @@ public class ItemController {
 		mav.setViewName("redirect:list");
 		return mav;
 	}	
+	//id에 해당하는 상품을 db에서 삭제
+	// list로 재요청
+	@PostMapping("delete")
+	public String delete(Integer id) { //뷰만 리턴
+		service.itemDelete(id);
+		return "redirect:list";
+	}
+	
 }

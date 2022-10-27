@@ -97,7 +97,13 @@
     <version>2.1</version>
 </dependency>    
 
-   
+<!-- sitemesh 설정 -->
+<!-- https://mvnrepository.com/artifact/org.sitemesh/sitemesh -->
+<dependency>
+    <groupId>org.sitemesh</groupId>
+    <artifactId>sitemesh</artifactId>
+    <version>3.0.1</version>
+</dependency>   
    
   </dependencies>
   <build>

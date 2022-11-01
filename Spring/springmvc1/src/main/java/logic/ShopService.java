@@ -92,4 +92,12 @@ public class ShopService {
 	public void userUpdate(User user) {
 		userDao.update(user);
 	}
+
+	public void userDelete(String userid) {
+		userDao.delete(userid);
+	}
+
+	public void userChgpass(String userid, String pass) {
+		userDao.chgpass(userid,pass);
+	}
 }

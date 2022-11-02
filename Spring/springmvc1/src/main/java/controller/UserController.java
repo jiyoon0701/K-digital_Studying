@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -248,5 +249,65 @@ public class UserController {
 			  ("비밀번호 수정시 db 오류 입니다.","password");
 		}
 		return "redirect:mypage?id="+loginUser.getUserid();
+	}
+	/*
+	 * "{url}search" : *search 인 요청인 경우 호출되는 메서드
+	 * @PathVariable String url : {url}값을 매개변수 전달.
+	 * 
+	 * http://localhost:8088/springmvc1/user/idsearch
+	 * url : id 값 저장
+	 * 
+	 * http://localhost:8088/springmvc1/user/pwsearch
+	 * url : pw 값 저장
+	 */
+	@PostMapping("{url}search")
+	public ModelAndView search(User user, BindingResult bresult,
+			@PathVariable String url) {
+		ModelAndView mav = new ModelAndView();
+		String code = "error.userid.search"; //아이디를 찾을 수 없습니다.
+		String title = "아이디";
+		if(user.getEmail() == null || user.getEmail().equals("")){
+			//rejectValue : 프로퍼티별로 오류 정보 저장.
+			// <form:errors path="email" /> 출력됨
+			//오류코드 : error.required.email 설정됨
+			bresult.rejectValue("email", "error.required"); 
+		}
+		if(user.getPhoneno() == null || 
+				                  user.getPhoneno().equals("")) {
+			// <form:errors path="phoneno" /> 출력됨
+			//오류코드 : error.required.phoneno 설정됨
+			bresult.rejectValue("phoneno", "error.required");
+		}
+		if(url.equals("pw")) { 
+			title="비밀번호";
+			code = "error.password.search"; 
+			if(user.getUserid() == null || 
+					                user.getUserid().equals("")) {
+				//<form:errors path="userid" /> 출력됨
+				//오류코드 : error.required.userid 설정됨
+				bresult.rejectValue("userid", "error.required");
+			}
+		}
+		if(bresult.hasErrors()) { 
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		//정상적인 입력인 경우
+		String result = null;
+		try {
+			//result : 사용자id,또는 비밀번호 저장
+		    result = service.getSearch(user,url);
+		} catch (EmptyResultDataAccessException e) {
+			//조회 결과가 없는 경우 발생되는 예외
+			//뷰의 ${errors.globalErrors} 목록에 추가됨 
+			bresult.reject(code); //global 오류 영역 저장 
+			mav.getModel().putAll(bresult.getModel());
+			return mav;
+		}
+		mav.addObject("result",result);
+		mav.addObject("title",title);
+		// /WEB-INF/view/user/search.jsp
+		mav.setViewName("user/search"); 
+		return mav;
 	}
 }

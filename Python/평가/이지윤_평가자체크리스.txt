@@ -1,0 +1,38 @@
+import pandas as pd
+import numpy as np
+import openpyxl
+
+#1. test.xlsx 파일을 읽어 df 변수에 저장하기. index이름은 학생의 이름으로 한다.
+df=pd.read_excel('test.xlsx', engine='openpyxl', index_col=0)
+df = pd.DataFrame(df)
+print(df)
+#2. 알고리즘 과목의 평균을 구하여 출력하는 코드
+mean_df = df['알고리즘'].mean()
+print("알고리즘 과목의 평균 ")
+print(str(mean_df))
+
+#3. 파이썬 과목의 중간값을 구하여 출력하는 코드 작성하기
+median_df = df['파이썬'].median()
+print("파이썬 과목의 중간값 ")
+print(str(median_df))
+
+#4. R 과목의 표준편차값을 구하여 출력하는 코드 작성하기
+std_df = df['R'].std()
+print("R과목의 표준편차 값 ")
+print(str(std_df))
+
+#5. 각 과목의 상관계수를 출력하는 코드 작성하기
+print("각 과목의 상관계수 ")
+print(str(df.corr()))
+
+#6. 홍길동 학생의 과목 평균을 구하는 코드를 작성하기
+print("홍길동 학생의 과목 평균 ")
+print(str(df.loc["홍길동"].mean()))
+
+#7. 각 과목별 합계을 구하는 코드 작성하기
+print("각 과목별 합계 ")
+print(str(df.sum()))
+
+#8. 각 이름별 합계을 구하는 코드 작성하기
+print("각 이름별 합계 ")
+print(str(df.sum(axis=1)))

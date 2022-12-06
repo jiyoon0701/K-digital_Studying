@@ -11,7 +11,7 @@ test1130_a.py
 1. mod2.py 파일을 읽어서 mod2.bak 파일로 복사하기.
 '''
 infp = open("mod2.py", "r", encoding='UTF8') #원본파일
-outfp = open("mod2.bak", "w", encoding="UTF8") #복사본파일
+outfp = open("mod2.bak","w",encoding="UTF8") #복사본파일
 while True :
     inStr = infp.readline() #text 형태의 파일 가능 
     if inStr == '' : #EOF(End Of File. 파일의 끝)
@@ -31,7 +31,7 @@ wpath = os.getcwd()+"/temp"
 if  not os.path.exists(wpath) :
     os.mkdir("temp") #temp 폴더 생성
    
-outfp = open("temp/indata.txt", 'w', encoding='UTF8')
+outfp = open("temp/indata.txt",'w',encoding='UTF8')
 while True :
     inline = input("저장 내용=>")
     if inline == '' :

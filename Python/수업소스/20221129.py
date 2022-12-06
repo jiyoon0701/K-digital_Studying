@@ -284,7 +284,7 @@ infp.close()
 
 #파일 쓰기 : 콘솔에서 내용을 입력받아 파일로 저장하기
 #현재 폴더의 data.txt 파일에 저장
-outfp = open("data.txt", "w", encoding="UTF-8")
+outfp = open("data.txt","w",encoding="UTF-8")
 while True :
     outstr = input("내용입력=>")
     if outstr == '' :
@@ -294,7 +294,7 @@ outfp.close()
 
 #문제 
 # data.txt 파일을 읽어서 화면에 출력하기
-infp = open("data.txt", "r", encoding="UTF-8")
+infp = open("data.txt","r",encoding="UTF-8")
 while True :
     instr = infp.readline() #한줄씩 읽기
     if instr == None or instr == "" :
@@ -302,11 +302,11 @@ while True :
     print(instr,end="")
 infp.close()    
 
-infp = open("data.txt", "r", encoding="UTF-8")
+infp = open("data.txt","r",encoding="UTF-8")
 print(infp.read())
 infp.close()
 
-infp = open("data.txt", "r", encoding="UTF-8")
+infp = open("data.txt","r",encoding="UTF-8")
 print(infp.readlines())
 infp.close()
 '''
@@ -316,7 +316,7 @@ infp.close()
 '''
 #이미지 파일을 읽어 복사하기
 #apple.gif 파일을 읽어서 apple2.gif파일로 복사하기
-infp = open("apple.gif", "rb")  #원본파일. 읽기위한 파일
+infp = open("apple.gif","rb")  #원본파일. 읽기위한 파일
 outfp = open("apple2.gif","wb") #복사본파일. 쓰기위한 파일
 while True :
     indata = infp.read() #설정된 버퍼의 크기만큼 읽기
@@ -335,7 +335,7 @@ outfp.close()
 #  임꺽정,80
 
 import re
-infp = open("score.txt", 'r', encoding="UTF-8")
+infp = open("score.txt",'r',encoding="UTF-8")
 data = infp.read()
 print(data)
 #\\d+  :  숫자1개이상

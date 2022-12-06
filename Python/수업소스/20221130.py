@@ -36,7 +36,7 @@ Created on Wed Nov 30 08:55:39 2022
 #폴더의 하위 파일 목록 조회 
 import os
 print(os.listdir())
-file= "data.txt"
+file="data.txt"
 os.path.exists(file) #존재?
 #문제 : 작업파일의 하위파일목록 출력하기
 # 파일인 경우 : 파일의 크기 os.path.getsize(파일명)
